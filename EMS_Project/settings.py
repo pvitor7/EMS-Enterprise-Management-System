@@ -36,12 +36,13 @@ DJANGO_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "django.contrib.staticfiles"
+    "django.contrib.staticfiles",
+    "django_extensions"
 ]
 
 THIRD_PARTY_APPS = ['rest_framework', 'rest_framework.authtoken']
 
-MY_APPS = ['departaments', 'employees']
+MY_APPS = ['departaments', 'employees', 'projects']
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS
 
