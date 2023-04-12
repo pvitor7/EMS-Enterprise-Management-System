@@ -6,7 +6,7 @@ from employees.models import Employees
 
 class Project(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
-    title = models.CharField(null=False, blank=False, max_length=48, unique=True)
+    title = models.CharField(null=False, blank=False, max_length=48, unique=False)
     estimed_hours = models.TimeField(default=0)
     last_hours = models.TimeField(default=0)
     departament = models.ForeignKey(Departament, on_delete=models.PROTECT, null=True, blank=True)
