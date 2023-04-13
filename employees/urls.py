@@ -1,8 +1,10 @@
 
-from .views import EmployeeListCreateView, EmployeeRetrieveUpdateDestroyView
+from .views import EmployeeListCreateView, EmployeeRetrieveUpdateDestroyView, DepartamentEmployeeView, DepartamentEmployeeIDView
 from django.urls import path
 
 urlpatterns = [
-    path("", EmployeeListCreateView.as_view(), name="departament-list-create-view"),
-    path("<pk>/", EmployeeRetrieveUpdateDestroyView.as_view(), name="departament-retrive-view"),
+    path("employees/<pk>/", EmployeeRetrieveUpdateDestroyView.as_view()),
+    path("employees/", EmployeeListCreateView.as_view()),
+    path("departaments/<str:departament_id>/employees/", DepartamentEmployeeView.as_view()),
+    path("departaments/<str:departament_id>/employees/<pk>/", DepartamentEmployeeIDView.as_view()),
 ]   
