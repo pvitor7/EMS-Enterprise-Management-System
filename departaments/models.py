@@ -14,6 +14,6 @@ class Departament(models.Model):
 class Roles(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     role = models.TextField(choices=RolesChoices.choices, default=RolesChoices.DEFAULT)
-    worked_hours = models.TimeField(default=0)
+    # worked_hours = models.TimeField(default=0)
     departament = models.ForeignKey(Departament, on_delete=models.CASCADE)
     employee = models.ForeignKey(Employees, on_delete=models.CASCADE, null=True, blank=True)
