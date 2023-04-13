@@ -7,7 +7,6 @@ from django.shortcuts import get_object_or_404
 
 
 
-
 class ProjectSerializer(serializers.ModelSerializer):
     supervisor = serializers.SerializerMethodField();
     class Meta:
@@ -31,7 +30,17 @@ class ProjectSerializer(serializers.ModelSerializer):
         if project_departament.exists() and (http_method == 'POST' or http_method == 'PATCH'):
             raise serializers.ValidationError({"detail": "This title of project already exists in departament."})
         
+        elif http_method == 'GET' and not project_departament.exists:
+            raise serializers.ValidationError({"detail": "Project not found in departament."})
+        
         return data
+
+
+    # def to_representation(self, instance):
+    #     departament_id = self.context['view'].kwargs.get('departament_id')
+    #     if str(instance.departament.id) != departament_id:
+    #         raise serializers.ValidationError({"detail": "Project not found in departament."})
+    #     return super().to_representation(instance)
 
 
     def create(self, validated_data):
@@ -53,11 +62,6 @@ class ProjectSerializer(serializers.ModelSerializer):
         return project
 
     
-    def to_representation(self, instance):
-        departament_id = self.context['view'].kwargs.get('departament_id')
-        if str(instance.departament.id) != departament_id:
-            raise serializers.ValidationError({"detail": "Project not found in departament."})
-        return super().to_representation(instance)
 
     
     def delete(self, instance):
