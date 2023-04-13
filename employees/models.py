@@ -26,7 +26,7 @@ class DriverLicense(models.TextChoices):
 
 class Employees(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
-    name = models.CharField(null=False, blank=False, max_length=128)
+    name = models.CharField(null=False, blank=False, max_length=128, unique=True)
     cpf = models.CharField(null=False, blank=False, max_length=11, unique=True)
     rg = models.CharField(unique=True, null=False, blank=False, max_length=9)
     gender = models.TextField(choices=Gender.choices, default=Gender.DEFAULT)
