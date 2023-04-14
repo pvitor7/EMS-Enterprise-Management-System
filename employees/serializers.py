@@ -2,6 +2,8 @@ from rest_framework import serializers
 from .models import Employees
 from departaments.models import Departament, Roles
 from django.db import transaction
+from datetime import timedelta, time
+
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
@@ -16,7 +18,15 @@ class EmployeeSerializer(serializers.ModelSerializer):
             return departament.departament.title
         else:
             return "Departament not found.";
-        
+
+    def validate(self, data):
+        import ipdb ; ipdb.set_trace()
+        if data['weekly_workload'][-3] != ":":
+            raise serializers.ValidationError({"detail": "The the weekly workload field value must have the following HH:MM format."});
+        return super().validate(data)
+
+
+
 
 class GETDepartamentEmployeeSerializer(serializers.ModelSerializer):
     employee = serializers.SerializerMethodField();
@@ -29,13 +39,13 @@ class GETDepartamentEmployeeSerializer(serializers.ModelSerializer):
 
 
 
+
 class DepartamentEmployeeSerializer(serializers.ModelSerializer):
     employee = serializers.CharField()
     class Meta:
         model = Roles
         fields = ['id', 'role', 'employee']
    
-
     def validate(self, data):
         departament_id = self.context['view'].kwargs.get('departament_id')
         if not departament_id:
