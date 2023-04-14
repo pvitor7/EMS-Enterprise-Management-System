@@ -20,7 +20,6 @@ class EmployeeSerializer(serializers.ModelSerializer):
             return "Departament not found.";
 
     def validate(self, data):
-        import ipdb ; ipdb.set_trace()
         if data['weekly_workload'][-3] != ":":
             raise serializers.ValidationError({"detail": "The the weekly workload field value must have the following HH:MM format."});
         return super().validate(data)
