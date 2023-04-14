@@ -1,6 +1,8 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from datetime import timedelta
+
 
 
 class Gender(models.TextChoices):
@@ -33,6 +35,6 @@ class Employees(models.Model):
     driver_license = models.TextField(choices=DriverLicense.choices, default=DriverLicense.DEFAULT)
     birth_date = models.DateField(null=False, blank=False)
     salary = models.DecimalField(default=0, max_digits=8, decimal_places=2)
-    weekly_hours = models.TimeField(default=0)
+    weekly_workload = models.CharField(default="44:00", blank=True, null=True, max_length=6)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
