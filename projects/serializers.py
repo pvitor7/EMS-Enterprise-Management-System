@@ -3,47 +3,36 @@ from .models import Project, ProjectsEmployees
 from employees.models import Employees
 from departaments.models import Departament
 from django.db import transaction
-from django.shortcuts import get_object_or_404
-
+from .utils import CalculateTime
+from datetime import datetime
 
 
 class ProjectSerializer(serializers.ModelSerializer):
     supervisor = serializers.SerializerMethodField();
     class Meta:
         model = Project
-        fields = "__all__"
+        fields = ['id', 'title', 'last_hours', 'departament', 'estimed_date', 'date_last_estimate_calc', 'supervisor', 'completed_hours']
+        read_only_fields = ['estimed_date', 'date_last_estimate_calc']
+
    
     def get_supervisor(self, obj):
-        supervisor_project = ProjectsEmployees.objects.filter(project=obj).first();
-        if not supervisor_project:
-            raise serializers.ValidationError({"detail": "Supervisor not found."});
-        return supervisor_project.employee.name;
-   
-   
+        supervisor_project = ProjectsEmployees.objects.filter(project=obj, role="Supervisor").first();
+        if supervisor_project:
+            return supervisor_project.employee.name;
+        return "Supervisor not found.";
+        
+        
     def validate(self, data):
-        http_method = self.context['request'].method
         departament_id = self.context['view'].kwargs.get('departament_id')
         if not departament_id:
             raise serializers.ValidationError({"detail": "Departament ID is required."})
-        
-        project_departament = Project.objects.filter(title=data['title'], departament_id=departament_id)
-        if project_departament.exists() and (http_method == 'POST' or http_method == 'PATCH'):
-            raise serializers.ValidationError({"detail": "This title of project already exists in departament."})
-        
-        elif http_method == 'GET' and not project_departament.exists:
-            raise serializers.ValidationError({"detail": "Project not found in departament."})
-        
         return data
 
 
-    # def to_representation(self, instance):
-    #     departament_id = self.context['view'].kwargs.get('departament_id')
-    #     if str(instance.departament.id) != departament_id:
-    #         raise serializers.ValidationError({"detail": "Project not found in departament."})
-    #     return super().to_representation(instance)
-
-
     def create(self, validated_data):
+        departament_id = self.context['view'].kwargs.get('departament_id')
+        departament = Departament.objects.get(id=departament_id)
+        
         supervisor_in_validated_data = self.context['request'].data.get('supervisor');
         if not supervisor_in_validated_data:
             raise serializers.ValidationError({"detail": "Supervisor is required."})
@@ -52,8 +41,15 @@ class ProjectSerializer(serializers.ModelSerializer):
         if not supervisor:
             raise serializers.ValidationError({"detail": "Supervisor not found."});
         
-        departament_id = self.context['view'].kwargs.get('departament_id')
-        departament = Departament.objects.get(id=departament_id)
+        estimed_date = CalculateTime.convert_days_hours_minutes(self, validated_data['last_hours']);
+        validated_data['estimed_date'] = estimed_date;
+        validated_data['date_last_estimate_calc'] = datetime.today().date();
+
+        title = validated_data.get('title');
+        project_already_exists = Project.objects.filter(title=title, departament=departament_id)
+        
+        if project_already_exists:
+            raise serializers.ValidationError({"detail": "Project already exist in departament."})
 
         with transaction.atomic():
             project = Project.objects.create(**validated_data, departament=departament)
@@ -62,11 +58,12 @@ class ProjectSerializer(serializers.ModelSerializer):
         return project
 
     
-
-    
     def delete(self, instance):
         departament_id = self.context['view'].kwargs.get('departament_id')
         project_id = self.context['view'].kwargs.get('pk')
+     
+        if not project_id:
+            raise serializers.ValidationError({"detail": "Project ID is required."})
         
         project = Project.objects.filter(id=project_id, departament_id=departament_id).first()
         if not project:
@@ -77,32 +74,36 @@ class ProjectSerializer(serializers.ModelSerializer):
     
     
     def update(self, instance, validated_data):
-        #verificando se o Projeto a ser atualizado existe no departamento
         departament_id = self.context['view'].kwargs.get('departament_id')
+
         project_id = self.context['view'].kwargs.get('pk')
+        if not project_id:
+            raise serializers.ValidationError({"detail": "Project ID is required."})
+        
         project = Project.objects.filter(id=project_id, departament_id=departament_id).first()
         if not project:
             raise serializers.ValidationError({"detail": "Project not found in this departament."})
         
-        #verificando se o supervisor enviado existe no banco
-        new_supervisor = validated_data.get("supervisor");
+        new_supervisor = self.context['request'].data.get('supervisor');
         supervisor_exist = Employees.objects.filter(name=new_supervisor).first();
-        if new_supervisor and not supervisor_exist.exists():
-            raise serializers.ValidationError("Supervisor not found.");
+        if not new_supervisor and not supervisor_exist:
+            raise serializers.ValidationError({"detail": "Supervisor not found."});
         
-        #filtrando e salvando tabela pivo
-        project_supervisor = ProjectsEmployees.objects.filter(employee=supervisor_exist, project=project, role="Supervisor").first();
-        if project_supervisor:
-            raise serializers.ValidationError({"detail": "The Supervisor is already in charge of the project."});
+        supervisor_project = ProjectsEmployees.objects.filter(project=project, role="Supervisor").first();
+        if supervisor_project:
+            supervisor_project.employee = supervisor_exist
+            supervisor_project.save()
+        else:
+            if supervisor_exist:
+                ProjectsEmployees.objects.create(project=project, employee=supervisor_exist, role="Supervisor");
         
-        with transaction.atomic():
-            project_supervisor.employee = supervisor_exist;
-            project_supervisor.role = "Supervisor";
-            project_supervisor.save()
-            
-            instance.title = validated_data.get('title', instance.title)
-            instance.estimed_hours = validated_data.get('estimed_hours', instance.estimed_hours)
-            instance.last_hours = validated_data.get('last_hours', instance.last_hours)
-            instance.save()
+        if validated_data.get('completed_hours'):
+            last_hours_recalc = CalculateTime.calc_hours(self, validated_data.get('last_hours', instance.last_hours), validated_data.get('completed_hours'));
+            validated_data['estimed_date'] = CalculateTime.convert_days_hours_minutes(self, last_hours_recalc);
+        
+        departament = Departament.objects.filter(id=departament_id).first();
+        validated_data['departament'] = departament or instance.departament;    
+        instance = super().update(instance, validated_data)
+        
         return instance
     
