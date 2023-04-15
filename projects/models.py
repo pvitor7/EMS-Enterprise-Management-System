@@ -7,9 +7,12 @@ from employees.models import Employees
 class Project(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     title = models.CharField(null=False, blank=False, max_length=48, unique=False)
-    estimed_hours = models.TimeField(default=0)
-    last_hours = models.TimeField(default=0)
+    estimed_date = models.DateField();
+    date_last_estimate_calc = models.DateField();
+    last_hours = models.CharField(max_length=8);
+    completed_hours = models.CharField(max_length=8);
     departament = models.ForeignKey(Departament, on_delete=models.PROTECT, null=True, blank=True)
+
 
 
 class ProjectsEmployees(models.Model):
