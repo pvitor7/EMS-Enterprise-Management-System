@@ -2,7 +2,6 @@ from rest_framework import serializers
 from .models import Employees
 from departaments.models import Departament, Roles
 from django.db import transaction
-from datetime import timedelta, time
 
 
 
@@ -20,11 +19,12 @@ class EmployeeSerializer(serializers.ModelSerializer):
             return "Departament not found.";
 
     def validate(self, data):
-        if data['weekly_workload'][-3] != ":":
+        weekly_workload = data.get('weekly_workload')
+        if weekly_workload and weekly_workload[-3] != ":":
             raise serializers.ValidationError({"detail": "The the weekly workload field value must have the following HH:MM format."});
         return super().validate(data)
 
-
+        
 
 
 class GETDepartamentEmployeeSerializer(serializers.ModelSerializer):
@@ -49,9 +49,6 @@ class DepartamentEmployeeSerializer(serializers.ModelSerializer):
         departament_id = self.context['view'].kwargs.get('departament_id')
         if not departament_id:
             raise serializers.ValidationError({"detail": "Departament ID is required."})
-        employee = Employees.objects.filter(name=data['employee']).first();
-        if data['employee'] and not employee:
-            raise serializers.ValidationError({"detail": "Employee not found."})
         return super().validate(data)
 
 
@@ -59,6 +56,8 @@ class DepartamentEmployeeSerializer(serializers.ModelSerializer):
         departament_id = self.context['view'].kwargs.get('departament_id')
         departament = Departament.objects.filter(id=departament_id).first();
         employee = Employees.objects.filter(name=validated_data['employee']).first();
+        if employee:
+            raise serializers.ValidationError({"detail": "Employee not found."})
         emplooye_already_associated = Roles.objects.filter(employee=employee, departament=departament).first();
         if emplooye_already_associated:
             raise serializers.ValidationError({"detail": "Employee already associated with the project."})
@@ -71,7 +70,7 @@ class DepartamentEmployeeSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         departament_id = self.context['view'].kwargs.get('departament_id')
-        employee_id = self.context['view'].kwargs.get('departament_id');
+        employee_id = self.context['view'].kwargs.get('pk');
         
         departament = Departament.objects.filter(id=departament_id).first();
         employee = Employees.objects.filter(id=employee_id).first();
