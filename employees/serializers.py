@@ -76,7 +76,7 @@ class DepartamentEmployeeSerializer(serializers.ModelSerializer):
         employee = Employees.objects.filter(id=employee_id).first();
         
         emplooye_associated = Roles.objects.filter(employee=employee, departament=departament).first();
-        
+       
         if not emplooye_associated:
             raise serializers.ValidationError({"detail": "Employee not associated with the project."});
         instance.role = validated_data.get('role')
