@@ -14,7 +14,6 @@ class ProjectSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'last_hours', 'departament', 'estimed_date', 'date_last_estimate_calc', 'supervisor', 'completed_hours']
         read_only_fields = ['estimed_date', 'date_last_estimate_calc']
 
-   
     def get_supervisor(self, obj):
         supervisor_project = ProjectsEmployees.objects.filter(project=obj, role="Supervisor").first();
         if supervisor_project:
@@ -107,3 +106,41 @@ class ProjectSerializer(serializers.ModelSerializer):
         
         return instance
     
+
+
+
+class ProjectEmployeeSerializer(serializers.ModelSerializer):
+    employee = serializers.CharField()
+    class Meta:
+        model = ProjectsEmployees
+        fields = ['id', 'role', 'employee']
+
+    def validate(self, data):
+        employee_name = data.get('employee');
+        employee = Employees.objects.filter(name=employee_name).first();
+        data['employee'] = employee.id
+        return super().validate(data);
+   
+
+    def create(self, validated_data):
+        project_id = self.context['view'].kwargs.get('pk')
+        project = Project.objects.filter(id=project_id).first();
+        
+        employee_id = validated_data.get('employee');
+        employee = Employees.objects.filter(id=employee_id).first();
+        if not employee:
+            raise serializers.ValidationError({"detail": "Employee is required."})
+        
+        role = validated_data.get('role');
+        if not role:
+            raise serializers.ValidationError({"detail": "Employee is required."});
+        
+        employee_already_exist = ProjectsEmployees.objects.filter(employee_id=employee.id, project_id=project.id).first();
+        if employee_already_exist:
+            raise serializers.ValidationError({"detail": "Employee already exist in this project."})
+        
+        validated_data['project'] = project
+        validated_data['employee'] = employee
+        return super().create(validated_data);
+
+        
