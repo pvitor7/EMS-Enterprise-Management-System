@@ -133,11 +133,17 @@ class ProjectEmployeeSerializer(serializers.ModelSerializer):
         
         role = validated_data.get('role');
         if not role:
-            raise serializers.ValidationError({"detail": "Employee is required."});
+            raise serializers.ValidationError({"detail": "Role is required.."});
+
+
+        can_participate = CalculateTime.get_next_project(self, project, employee)
+        if not can_participate:
+            raise serializers.ValidationError({"detail": "The employee is not able to participate in the project for exceeding the allowed weekly hours limit."})
         
-        employee_already_exist = ProjectsEmployees.objects.filter(employee_id=employee.id, project_id=project.id).first();
-        if employee_already_exist:
+        employee_in_project = ProjectsEmployees.objects.filter(employee_id=employee.id, project_id=project.id).first();
+        if employee_in_project:
             raise serializers.ValidationError({"detail": "Employee already exist in this project."})
+
         
         validated_data['project'] = project
         validated_data['employee'] = employee
