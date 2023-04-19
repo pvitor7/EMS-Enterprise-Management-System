@@ -1,41 +1,46 @@
-version: '3.9'
+version: '3.8'
 
 
 services:
   db:
-    image: mysql:latest
-    env_file: .env 
+    image: mysql:8.0
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     ports: 
-        - ${DB_PORT}:${DB_PORT}
+        - 3306:3306
     volumes: 
-        - mysql:/var/lib/mysql
+        - db:/var/lib/mysql
+
 
   migration: 
     build: . 
     env_file: .env
     command: 
-        bash -c 'while !</dev/tcp/db/${DB_PORT}; do sleep 5; done; python manage.py migrate'
+        bash -c 'while !</dev/tcp/db/3306; do sleep 5; done; python manage.py migrate'
     volumes: 
         - .:/code
     depends_on: 
         - db
 
+
   web:
     build: . 
     env_file: .env 
     command: 
-        bash -c 'while !</dev/tcp/db/${DB_PORT}; do sleep 5; done; python manage.py runserver 0.0.0.0:${WEB_PORT}'
+        bash -c 'while !</dev/tcp/db/3306; do sleep 5; done; python manage.py runserver 0.0.0.0:8000'
     volumes: 
         - .:/code
     stdin_open: true 
     tty: true 
     ports: 
-        - ${WEB_PORT}:8000
+        - 8000:8000
 
     depends_on: 
         - db
         - migration
 
 
-volumes: 
-    mysql:
+volumes:
+  db:
+    driver: local

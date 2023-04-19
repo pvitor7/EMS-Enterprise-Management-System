@@ -31,7 +31,7 @@ SECRET_KEY = "django-insecure-50v*@qg*6^r_*&aw&v5o5+mrphxl5ei$75otlzv3og+8d$v_jl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "db_ems", "127.0.0.1", str(os.getenv("MYSQL_HOST")), "db"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", os.getenv("MYSQL_HOST"), "db", "empresa"]
 
 
 # Application definition
@@ -95,18 +95,12 @@ WSGI_APPLICATION = "EMS_Project.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
+        "HOST":  os.getenv("MYSQL_ROOT_HOST"),
         "NAME": os.getenv("MYSQL_DATABASE"),
         "USER": "root",
         "PASSWORD": os.getenv("MYSQL_ROOT_PASSWORD"),
-        "HOST":  os.getenv("MYSQL_HOST"),
-        "PORT": os.getenv("DB_PORT"),
-        "OPTIONS": {"charset": "utf8mb4"},
-        # "ENGINE": "django.db.backends.mysql",
-        # "NAME": os.getenv("MYSQL_DATABASE"),
-        # "USER": os.getenv("MYSQL_USER"),
-        # "PASSWORD": os.getenv("MYSQL_PASSWORD"),
-        # "HOST":  os.getenv("MYSQL_HOST"),
-        # "PORT": os.getenv("DB_PORT"),
+        "PORT": "3306",
+        "OPTIONS": {"charset": "utf8mb4"}
     },
 }
 
