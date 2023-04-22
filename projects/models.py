@@ -10,8 +10,10 @@ class Project(models.Model):
     estimed_date = models.DateField();
     date_last_estimate_calc = models.DateField();
     last_hours = models.CharField(null=True, blank=True, max_length=8)
-    completed_hours = models.CharField(null=True, blank=True, max_length=8)
+    completed_hours = models.CharField(null=True, blank=True, max_length=8, default="00:00")
     departament = models.ForeignKey(Departament, on_delete=models.PROTECT, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 
@@ -20,3 +22,5 @@ class ProjectsEmployees(models.Model):
     role = models.TextField(choices=RolesChoices.choices, default=RolesChoices.DEFAULT)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     employee = models.ForeignKey(Employees, on_delete=models.CASCADE, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

@@ -9,11 +9,12 @@ class RolesChoices(models.TextChoices):
 class Departament(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     title = models.CharField(null=False, blank=False, max_length=48, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class Roles(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     role = models.TextField(choices=RolesChoices.choices, default=RolesChoices.DEFAULT)
-    # worked_hours = models.TimeField(default=0)
     departament = models.ForeignKey(Departament, on_delete=models.CASCADE)
     employee = models.ForeignKey(Employees, on_delete=models.CASCADE, null=True, blank=True)
