@@ -1,24 +1,23 @@
-version: '3.8'
+version: '3.9'
 
 
 services:
   db:
-    image: mysql
+    image: mysql:8.0
     environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USERNAME}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_DATABASE: '${MYSQL_DATABASE}'
+      MYSQL_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports: 
         - 3306:3306
-    volumes: 
-        - db:/var/lib/mysql
-        - db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
 
   migration: 
     build: . 
     env_file: .env
     command: 
-        bash -c 'while !</dev/tcp/db/3306; do sleep 5; done; python manage.py migrate'
+        bash -c 'while !</dev/tcp/db/3306; do sleep 10; done; python manage.py migrate'
     volumes: 
         - .:/code
     depends_on: 
@@ -28,7 +27,7 @@ services:
     build: . 
     env_file: .env 
     command: 
-        bash -c 'while !</dev/tcp/db/3306; do sleep 5; done; python manage.py runserver 0.0.0.0:8000'
+        bash -c 'while !</dev/tcp/db/3306; do sleep 10; done; python manage.py runserver 0.0.0.0:8000'
     volumes: 
         - .:/code
     stdin_open: true 
@@ -39,8 +38,3 @@ services:
     depends_on: 
         - db
         - migration
-
-
-volumes:
-  db:
-    driver: local
