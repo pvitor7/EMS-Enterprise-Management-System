@@ -52,9 +52,6 @@ class CalculateTime:
         if number_employees > 0:
             for employee_in_project in employees_in_project:
                 if employee_in_project.employee:
-                    
-                    print("Horas de projeto: ", new_total_hours)
-                    print(employee_in_project.employee.name, employee_in_project.employee.weekly_workload)
                     new_total_hours = CalculateTime.completed_hours(self, new_total_hours, employee_in_project.employee.weekly_workload)
         #####################################################################
         completed_hours = int(new_total_hours[0:-3])
@@ -83,18 +80,21 @@ class CalculateTime:
             if len(total_minutes) == 1:
                 total_minutes = f'0{total_minutes}'
 
+        if completed_hours > total_hours:
+            return project.last_hours;
+
         if total_hours < 10:
             total_hours = str(f'0{int(total_hours)}')
         else:
             total_hours = str(int(total_hours))
 
 
-        print("calculo de horas no projeto: ->", f'{total_hours}:{total_minutes}')
+        
         return f'{total_hours}:{total_minutes}'
 
     
     def convert_days_hours_minutes(self, time):
-        print(time)
+        
         days=0;
         hours = int(time[0:-3]);
         minutes = int(time[-2:-1]);
@@ -107,7 +107,9 @@ class CalculateTime:
             hours = str(f'0{hours}')
         if minutes < 10:
             minutes = str(f'0{minutes}');
-            
+        
+        print(days, hours, minutes)
+        
         if days:
             today = datetime.today().date();
             term = pd.bdate_range(today, periods=days);
