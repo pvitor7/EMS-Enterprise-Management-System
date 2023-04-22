@@ -4,19 +4,21 @@ from employees.models import Employees
 from departaments.models import Departament
 from django.db import transaction
 from .utils import CalculateTime
-from datetime import datetime
+from datetime import datetime, time
 
 
 class ProjectSerializer(serializers.ModelSerializer):
     supervisor = serializers.SerializerMethodField();
+    last_hours = serializers.CharField();
+    
     class Meta:
         model = Project
         fields = ['id', 'title', 'last_hours', 'departament', 'estimed_date', 'date_last_estimate_calc', 'supervisor', 'completed_hours']
-        read_only_fields = ['estimed_date', 'date_last_estimate_calc']
+        read_only_fields = ['estimed_date', 'date_last_estimate_calc', 'completed_hours']
 
     def get_supervisor(self, obj):
         supervisor_project = ProjectsEmployees.objects.filter(project=obj, role="Supervisor").first();
-        if supervisor_project:
+        if supervisor_project.employee:
             return supervisor_project.employee.name;
         return "Supervisor not found.";
         
@@ -55,12 +57,11 @@ class ProjectSerializer(serializers.ModelSerializer):
             ProjectsEmployees.objects.create(role="Supervisor", employee=supervisor, project=project);
         
         return project
-
+    
     
     def delete(self, instance):
         departament_id = self.context['view'].kwargs.get('departament_id')
         project_id = self.context['view'].kwargs.get('pk')
-     
         if not project_id:
             raise serializers.ValidationError({"detail": "Project ID is required."})
         
@@ -74,7 +75,6 @@ class ProjectSerializer(serializers.ModelSerializer):
     
     def update(self, instance, validated_data):
         departament_id = self.context['view'].kwargs.get('departament_id')
-
         project_id = self.context['view'].kwargs.get('pk')
         if not project_id:
             raise serializers.ValidationError({"detail": "Project ID is required."})
@@ -85,7 +85,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         
         new_supervisor = self.context['request'].data.get('supervisor');
         supervisor_exist = Employees.objects.filter(name=new_supervisor).first();
-        if not new_supervisor and not supervisor_exist:
+        if new_supervisor and not supervisor_exist:
             raise serializers.ValidationError({"detail": "Supervisor not found."});
         
         supervisor_project = ProjectsEmployees.objects.filter(project=project, role="Supervisor").first();
@@ -96,15 +96,14 @@ class ProjectSerializer(serializers.ModelSerializer):
             if supervisor_exist:
                 ProjectsEmployees.objects.create(project=project, employee=supervisor_exist, role="Supervisor");
         
-        if validated_data.get('completed_hours'):
-            last_hours_recalc = CalculateTime.calc_hours(self, validated_data.get('last_hours', instance.last_hours), validated_data.get('completed_hours'));
-            validated_data['estimed_date'] = CalculateTime.convert_days_hours_minutes(self, last_hours_recalc);
+        last_hours_recalc = CalculateTime.calculate_hours_project(self, project);
+        validated_data['completed_hours'] = last_hours_recalc
+        validated_data['estimed_date'] = CalculateTime.convert_days_hours_minutes(self, last_hours_recalc);
+        
         
         departament = Departament.objects.filter(id=departament_id).first();
         validated_data['departament'] = departament or instance.departament;    
-        instance = super().update(instance, validated_data)
-        
-        return instance
+        return super().update(instance, validated_data)
     
 
 
@@ -125,7 +124,6 @@ class ProjectEmployeeSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         project_id = self.context['view'].kwargs.get('pk')
         project = Project.objects.filter(id=project_id).first();
-        
         employee_id = validated_data.get('employee');
         employee = Employees.objects.filter(id=employee_id).first();
         if not employee:
@@ -135,7 +133,6 @@ class ProjectEmployeeSerializer(serializers.ModelSerializer):
         if not role:
             raise serializers.ValidationError({"detail": "Role is required.."});
 
-
         can_participate = CalculateTime.get_next_project(self, project, employee)
         if not can_participate:
             raise serializers.ValidationError({"detail": "The employee is not able to participate in the project for exceeding the allowed weekly hours limit."})
@@ -144,7 +141,9 @@ class ProjectEmployeeSerializer(serializers.ModelSerializer):
         if employee_in_project:
             raise serializers.ValidationError({"detail": "Employee already exist in this project."})
 
-        
+        recalculate_hours = CalculateTime.calculate_hours_project(self, project, employee);
+        Project.objects.filter(id=project.id).update(last_hours=recalculate_hours);
+                
         validated_data['project'] = project
         validated_data['employee'] = employee
         return super().create(validated_data);
