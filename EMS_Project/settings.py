@@ -48,13 +48,14 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = ['rest_framework', 'rest_framework.authtoken']
 
-MY_APPS = ['departaments', 'employees', 'projects']
+MY_APPS = ['departaments', 'employees', 'projects', 'users']
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     )
 }
 
@@ -146,4 +147,5 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# AUTH_USER_MODEL = 'employees.Employees'
+AUTH_USER_MODEL = 'users.User'
+
