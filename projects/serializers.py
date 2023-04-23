@@ -4,7 +4,7 @@ from employees.models import Employees
 from departaments.models import Departament
 from django.db import transaction
 from .utils import CalculateTime
-from datetime import datetime, time
+from datetime import datetime, time, timedelta
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -46,6 +46,9 @@ class ProjectSerializer(serializers.ModelSerializer):
         validated_data['estimed_date'] = estimed_date;
         validated_data['date_last_estimate_calc'] = datetime.today().date();
 
+        hours, minutes = validated_data['last_hours'].split(':')
+        validated_data['last_hours'] = timedelta(hours=int(hours), minutes=int(minutes))
+
         title = validated_data.get('title');
         project_already_exists = Project.objects.filter(title=title, departament=departament_id)
         
@@ -58,6 +61,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         
         return project
     
+
     
     def delete(self, instance):
         departament_id = self.context['view'].kwargs.get('departament_id')
@@ -71,6 +75,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         
         project.delete()
         return instance
+
     
     
     def update(self, instance, validated_data):
@@ -124,6 +129,9 @@ class ProjectEmployeeSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         project_id = self.context['view'].kwargs.get('pk')
         project = Project.objects.filter(id=project_id).first();
+        if not project:
+            raise serializers.ValidationError({"detail": "Project not found."})
+        
         employee_id = validated_data.get('employee');
         employee = Employees.objects.filter(id=employee_id).first();
         if not employee:
@@ -146,6 +154,4 @@ class ProjectEmployeeSerializer(serializers.ModelSerializer):
                 
         validated_data['project'] = project
         validated_data['employee'] = employee
-        return super().create(validated_data);
-
-        
+        return super().create(validated_data);      

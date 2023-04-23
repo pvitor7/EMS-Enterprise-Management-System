@@ -19,12 +19,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
             return "Departament not found.";
 
     def validate(self, data):
-        weekly_workload = data.get('weekly_workload')
-        if weekly_workload and weekly_workload[-3] != ":":
-            raise serializers.ValidationError({"detail": "The the weekly workload field value must have the following HH:MM format."});
         return super().validate(data)
-
-        
 
 
 class GETDepartamentEmployeeSerializer(serializers.ModelSerializer):
@@ -34,7 +29,10 @@ class GETDepartamentEmployeeSerializer(serializers.ModelSerializer):
         fields = ['id', 'role', 'employee']
         
     def get_employee(self, obj):
-        return Employees.objects.get(id=obj.employee.id).name
+        if obj.employee:
+            return obj.employee.name
+        else:
+            return "Employee not found.";
 
 
 
@@ -56,7 +54,7 @@ class DepartamentEmployeeSerializer(serializers.ModelSerializer):
         departament_id = self.context['view'].kwargs.get('departament_id')
         departament = Departament.objects.filter(id=departament_id).first();
         employee = Employees.objects.filter(name=validated_data['employee']).first();
-        if employee:
+        if not employee:
             raise serializers.ValidationError({"detail": "Employee not found."})
         emplooye_already_associated = Roles.objects.filter(employee=employee, departament=departament).first();
         if emplooye_already_associated:
@@ -94,9 +92,9 @@ class DepartamentEmployeeSerializer(serializers.ModelSerializer):
         
         if not emplooye_associated:
             raise serializers.ValidationError({"detail": "Employee not associated with the project."});
-        return instance;
+        return emplooye_associated;
     
     
     def to_representation(self, instance):
-        instance.employee = Employees.objects.get(id=instance.employee.id)
+        instance.employee = Employees.objects.get(id=instance.employee.id).name
         return super().to_representation(instance)

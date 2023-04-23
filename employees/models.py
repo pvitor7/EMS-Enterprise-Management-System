@@ -35,6 +35,6 @@ class Employees(models.Model):
     driver_license = models.TextField(choices=DriverLicense.choices, default=DriverLicense.DEFAULT)
     birth_date = models.DateField(null=False, blank=False)
     salary = models.DecimalField(default=0, max_digits=8, decimal_places=2)
-    weekly_workload = models.CharField(default="44:00", blank=True, null=True, max_length=6)
+    weekly_workload = models.DurationField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

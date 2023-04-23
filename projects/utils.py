@@ -3,6 +3,8 @@ from pandas.tseries.offsets import Week
 from datetime import datetime, date
 import pandas as pd
 from .models import ProjectsEmployees
+from django.forms.models import model_to_dict
+
 
 class CalculateTime:
     
@@ -87,28 +89,23 @@ class CalculateTime:
             total_hours = str(f'0{int(total_hours)}')
         else:
             total_hours = str(int(total_hours))
-
-
         
         return f'{total_hours}:{total_minutes}'
 
     
     def convert_days_hours_minutes(self, time):
-        
         days=0;
         hours = int(time[0:-3]);
         minutes = int(time[-2:-1]);
         
         if hours > 8:
-            days = float(hours/8);
+            days = float(hours/8) + 1;
             hours = hours%24;
             
         if hours < 10:
             hours = str(f'0{hours}')
         if minutes < 10:
             minutes = str(f'0{minutes}');
-        
-        print(days, hours, minutes)
         
         if days:
             today = datetime.today().date();
@@ -140,13 +137,20 @@ class CalculateTime:
 
         #verificando se as horas a trabalhar na semana mais as horas do novo projeto até o final de semana ultrapassarão as hora permitidas para o funcionário.
         project_hours_week = 0
+        print("Model to dict aqui:", model_to_dict(project))
+        print("Data aqui:", project.estimed_date, next_friday.date())
+        
         if project.estimed_date > next_friday.date():
-            project_hours_week = (days_left - 1) * 8;
+            project_hours_week = days_left * 8;
         else:
             calculate_week_project = pd.Timestamp(project.estimed_date).date() - today
             project_hours_week = int(calculate_week_project.days +  1) * 8;
-           
-        accept_new_project =  (hours_worked + project_hours_week) < int(employee.weekly_workload[:-3])
+        
+        print("horas por semana aqui: ->:", project_hours_week, hours_worked)
+        total_seconds = employee.weekly_workload.total_seconds()
+        hours = round(total_seconds / 3600)
+        
+        accept_new_project =  (hours_worked + project_hours_week) < hours
         if accept_new_project:
             return True
         

@@ -97,16 +97,10 @@ DATABASES = {
         "ENGINE": "django.db.backends.mysql",
         "HOST":  os.getenv("MYSQL_ROOT_HOST"),
         "NAME": os.getenv("MYSQL_DATABASE"),
-        "USER": os.getenv("MYSQL_USERNAME"),
+        "USER": os.getenv("MYSQL_USER"),
         "PASSWORD": os.getenv("MYSQL_ROOT_PASSWORD"),
-        "PORT": "3306",
-        "OPTIONS": {"charset": "utf8mb4"},
-        # "ENGINE": "django.db.backends.mysql",
-        # "NAME": os.getenv("MYSQL_DATABASE"),
-        # "USER": os.getenv("MYSQL_USER"),
-        # "PASSWORD": os.getenv("MYSQL_PASSWORD"),
-        # "HOST":  os.getenv("MYSQL_HOST"),
-        # "PORT": os.getenv("DB_PORT"),
+        "PORT": "3307",
+        
     },
 }
 

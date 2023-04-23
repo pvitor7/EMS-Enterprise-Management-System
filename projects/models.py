@@ -9,8 +9,8 @@ class Project(models.Model):
     title = models.CharField(null=False, blank=False, max_length=48, unique=False)
     estimed_date = models.DateField();
     date_last_estimate_calc = models.DateField();
-    last_hours = models.CharField(null=True, blank=True, max_length=8)
-    completed_hours = models.CharField(null=True, blank=True, max_length=8, default="00:00")
+    last_hours = models.DurationField()
+    completed_hours = models.DurationField(null=True, blank=True)
     departament = models.ForeignKey(Departament, on_delete=models.PROTECT, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
