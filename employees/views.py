@@ -1,5 +1,5 @@
 from .models import Employees
-from .serializers import EmployeeSerializer, DepartamentEmployeeSerializer, GETDepartamentEmployeeSerializer, RetriveDepartamentEmployeeSerializer, ProjectEmployeeIDSerializer
+from .serializers import EmployeeSerializer, DepartamentEmployeeSerializer, GETDepartamentEmployeeSerializer,  ProjectEmployeeIDSerializer
 from departaments.models import Roles
 from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
@@ -36,7 +36,7 @@ class DepartamentEmployeeIDView(SerializerByMethodMixin, generics.RetrieveUpdate
     permission_classes = [IsAuthenticated]
     queryset = Roles.objects.all()
     serializer_map = {
-        'GET': RetriveDepartamentEmployeeSerializer,
+        'GET': EmployeeSerializer,
         'PATCH': DepartamentEmployeeSerializer,
         'DELETE': DepartamentEmployeeSerializer
     }

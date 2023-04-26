@@ -1,5 +1,5 @@
 from .models import Project, ProjectsEmployees
-from .serializers import ProjectSerializer, ProjectEmployeeSerializer, ProjectRepresentationSerializer
+from .serializers import ProjectSerializer, ProjectEmployeeSerializer
 from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -13,7 +13,7 @@ class ProjectListCreateView(SerializerByMethodMixin, generics.ListCreateAPIView)
     permission_classes = [IsAuthenticated]
     queryset = Project.objects.all()
     serializer_map = {
-        'GET': ProjectRepresentationSerializer,
+        'GET': ProjectSerializer,
         'POST': ProjectSerializer,
     }
     # serializer_class = ProjectSerializer

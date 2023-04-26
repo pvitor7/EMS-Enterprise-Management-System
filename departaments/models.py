@@ -16,5 +16,5 @@ class Departament(models.Model):
 class Roles(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     role = models.TextField(choices=RolesChoices.choices, default=RolesChoices.DEFAULT)
-    departament = models.ForeignKey(Departament, on_delete=models.CASCADE)
-    employee = models.ForeignKey(Employees, on_delete=models.CASCADE, null=True, blank=True)
+    departament = models.ForeignKey(Departament, on_delete=models.SET_NULL, null=True)
+    employee = models.ForeignKey(Employees, on_delete=models.SET_NULL, null=True, blank=True)

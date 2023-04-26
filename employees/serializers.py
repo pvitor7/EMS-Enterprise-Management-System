@@ -3,6 +3,7 @@ from .models import Employees
 from departaments.models import Departament, Roles
 from projects.models import ProjectsEmployees, Project
 from django.db import transaction
+from projects.utils import CalculateTime
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
@@ -17,13 +18,23 @@ class EmployeeSerializer(serializers.ModelSerializer):
             return departament.departament.title
         else:
             return "Departament not found.";
-
+        
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['weekly_workload'] = CalculateTime.timedelta_to_str(self, instance.weekly_workload)
+        return data
+        
 
 class RetriveDepartamentEmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employees
         fields = '__all__'
 
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['weekly_workload'] = CalculateTime.timedelta_to_str(self, instance.weekly_workload)
+        return data
+    
 
 class GETDepartamentEmployeeSerializer(serializers.ModelSerializer):
     departament = serializers.SerializerMethodField();
@@ -42,10 +53,10 @@ class GETDepartamentEmployeeSerializer(serializers.ModelSerializer):
         return obj.departament.title
         
 
+
 class DepartamentEmployeeSerializer(serializers.ModelSerializer):
     employee = serializers.CharField()
     departament = serializers.SerializerMethodField();
-
     class Meta:
         model = Roles
         fields = ['id', 'role', 'employee', 'departament']
@@ -92,6 +103,7 @@ class DepartamentEmployeeSerializer(serializers.ModelSerializer):
         instance.role = validated_data.get('role')
         return super().update(instance, validated_data);
     
+    
     def delete(self, instance):
         departament_id = self.context['view'].kwargs.get('departament_id')
         employee_id = self.context['view'].kwargs.get('pk');
@@ -111,6 +123,12 @@ class ProjectEmployeeIDSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employees
         fields = ['name', 'weekly_workload', 'driver_license', 'departament', 'project']
+    
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['weekly_workload'] = CalculateTime.timedelta_to_str(self, instance.weekly_workload)
+        return data
+    
     
     def get_departament(self, obj):
         departament_id = self.context['view'].kwargs.get('departament_id')

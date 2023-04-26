@@ -12,7 +12,7 @@ class Project(models.Model):
     date_last_estimate_calc = models.DateTimeField(auto_now=True)
     last_hours = models.DurationField(default=timedelta(seconds=0))
     completed_hours = models.DurationField(null=True, blank=True, default=timedelta(seconds=0))
-    departament = models.ForeignKey(Departament, on_delete=models.PROTECT, null=True, blank=True)
+    departament = models.ForeignKey(Departament, on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -20,7 +20,7 @@ class Project(models.Model):
 class ProjectsEmployees(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     role = models.TextField(choices=RolesChoices.choices, default=RolesChoices.DEFAULT)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    employee = models.ForeignKey(Employees, on_delete=models.CASCADE, null=True, blank=True)
+    project = models.ForeignKey(Project, on_delete=models.SET_NULL, null=True)
+    employee = models.ForeignKey(Employees, on_delete=models.SET_NULL, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

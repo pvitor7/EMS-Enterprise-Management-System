@@ -7,19 +7,6 @@ from .utils import CalculateTime
 from datetime import datetime
 
 
-class ProjectRepresentationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Project
-        fields = ['id', 'title', 'last_hours', 'departament', 'estimed_date', 'date_last_estimate_calc','completed_hours', 'created_at']
-
-    def to_representation(self, instance):
-        data = super().to_representation(instance)
-        data['last_hours'] = CalculateTime.timedelta_to_str(self, instance.last_hours)
-        data['completed_hours'] = CalculateTime.timedelta_to_str(self, instance.completed_hours)
-        return data
-
-    
-
 class ProjectSerializer(serializers.ModelSerializer):
     supervisor = serializers.SerializerMethodField();
     last_hours = serializers.CharField();
