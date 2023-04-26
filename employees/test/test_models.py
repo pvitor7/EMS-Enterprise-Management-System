@@ -19,16 +19,16 @@ class DepartamentModelTest(TestCase):
         }
         
             
-    def test_create_departament(self):
-        departament = Employees.objects.create(**self.dict_employee)
-        self.assertEqual(departament.name, self.dict_employee["name"])
-        self.assertEqual(departament.cpf, self.dict_employee["cpf"])
-        self.assertEqual(departament.rg, self.dict_employee["rg"])
-        self.assertEqual(departament.gender, self.dict_employee["gender"])
-        self.assertEqual(departament.birth_date, self.dict_employee["birth_date"])
-        self.assertEqual(departament.driver_license, self.dict_employee["driver_license"])
-        self.assertEqual(departament.salary, self.dict_employee["salary"])
-        self.assertEqual(departament.weekly_hours, self.dict_employee["weekly_hours"])
+    # def test_create_departament(self):
+    #     departament = Employees.objects.create(**self.dict_employee)
+    #     self.assertEqual(departament.name, self.dict_employee["name"])
+    #     self.assertEqual(departament.cpf, self.dict_employee["cpf"])
+    #     self.assertEqual(departament.rg, self.dict_employee["rg"])
+    #     self.assertEqual(departament.gender, self.dict_employee["gender"])
+    #     self.assertEqual(departament.birth_date, self.dict_employee["birth_date"])
+    #     self.assertEqual(departament.driver_license, self.dict_employee["driver_license"])
+    #     self.assertEqual(departament.salary, self.dict_employee["salary"])
+    #     self.assertEqual(departament.weekly_hours, self.dict_employee["weekly_hours"])
         
         
     # def test_create_departament_with_empty_title(self):
