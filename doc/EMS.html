@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:3000/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="generator" content="Insomnia Documenter v0.4.1">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <link rel="shortcut icon" href="http://localhost:3000/favicon.ico">
+  <link rel="stylesheet" href="./EMS_files/bundle.css">
+  <script defer="" src="./EMS_files/bundle.js"></script>
+  <link href="./EMS_files/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<title>EMS</title></head>
+<body cz-shortcut-listen="true">
+  <noscript>In order to view this documentation page, you have to enable JavaScript in your web browser.</noscript>
+  <div id="app" data-root="."> <header style="border-top: 6px solid rgb(106, 87, 213);"><div class="header-left"><span class="hamburger-toggler"><i class="fa fa-bars" aria-hidden="true"></i></span> <div class="logo"><img src="./EMS_files/logo.png" alt="EMS"></div> <h1 class="title">EMS</h1></div> <div class="header-right"><div class="run"><a href="https://insomnia.rest/run/?label=EMS&amp;uri=http%3A%2F%2Flocalhost%3A3000.%2Finsomnia.json" target="_blank"><img src="./EMS_files/run.svg" alt="Run in Insomnia"></a></div> <div class="environment"><label for="env" style="display: inline-block;">Environment:</label> <select id="env"><option value="0">Base Environment</option></select></div> <span class="example-toggler" title="Toggle request examples"><i class="fa fa-code" aria-hidden="true"></i></span></div></header> <section class="wrapper"><aside class="svelte-dekk65"> <ul class="svelte-dbizbl"><li class="folder"><span class="sidebar-list-link name svelte-dbizbl"><span>Users</span></span> </li><li class="folder"><span class="sidebar-list-link name svelte-dbizbl"><span>Employees</span></span> </li><li class="folder"><span class="sidebar-list-link name svelte-dbizbl"><span>Departaments</span></span> </li><li class="folder"><span class="sidebar-list-link name svelte-dbizbl"><span>Projects</span></span> </li> </ul></aside> <section class="content svelte-1jbhgwi"><div class="row"><div class="left"><h1>EMS</h1> <div class="description"><h1>Sistema de gerenciamento empresarial</h1>
+<p><a href="https://github.com/pvitor7/EMS-Enterprise-Management-System" target="_blank">Acesse o repositório</a></p>
+<p>O sistema de gerenciamento empresarial é uma aplicação que foi desenvolvida com o objetivo de atender às necessidades de gestão de uma empresa. Ele consiste em duas partes, uma que utiliza o MySQL como banco de dados e outra que utiliza o Python e o Django para a criação de uma API Rest.</p>
+<p>Para garantir uma maior compatibilidade, as duas partes foram implementadas em contêineres Docker, seguindo as melhores práticas de desenvolvimento de software. Além disso, também foram desenvolvidos testes para garantir a qualidade e integridade do código.</p></div></div> <div class="right"><div class="language-selector svelte-1jbhgwi"><div class="selectContainer svelte-l63srs" style="">  <input autocomplete="off" autocorrect="off" spellcheck="false" readonly="true" placeholder="" class="svelte-l63srs" style=""> <div class="selectedItem svelte-l63srs"><div class="selection svelte-17yna57">cURL</div></div>  <div class="indicator svelte-l63srs"><svg width="100%" height="100%" viewBox="0 0 20 20" focusable="false" class="svelte-l63srs"><path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747
+            3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0
+            1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502
+            0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0
+            0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path></svg></div> </div></div></div></div> <div class="row"><div class="left"><h2>Users</h2> <div class="description"><h3 id="usurios">Usuários</h3></div> <hr></div> <div class="right"></div></div> <div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_bb864574539643708a956946dcb99245">&nbsp;</div> <h3 class="request-title"><strong class="post svelte-1qvssvw">POST</strong> Create User</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/users/register/</pre> <div class="description"><h2 id="criandoumnovousurio">Criando um novo usuário</h2>
+<h4 id="essarotanonecessidadeautenticao">Essa rota não necessida de autenticação</h4>
+<h4 id="corpodarequisio">Corpo da Requisição:</h4>
+<pre><code class="json language-json">{
+    "username": "userone",
+    "password": "s3nh4s3gur4",
+    "email": "one.special@mail.com",
+    "cellphone": "11999999999"
+}
+</code></pre>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<p><strong><em>STATUS 201 CREATED</em></strong></p>
+<pre><code class="json language-json">{
+    "id": "a8a6dcf4-6028-4994-a068-16e3636f7754",
+    "username": "userone",
+    "email": "one.special@mail.com",
+    "cellphone": "11999999999"
+}
+</code></pre></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Content-Type</div> <div class="value svelte-t9o7qk">application/json</div></div> </div> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Body</span> <span class="note svelte-t9o7qk">json</span></div> <div class="raw-data"><pre>{
+  "username": "userone",
+  "password": "s3nh4s3gur4",
+  "email": "one.special@mail.com",
+  "cellphone": "11999999999"
+}</pre></div> </div></div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/users/register/"</span> \
+  -H <span class="hljs-string">'Content-Type: application/json'</span> \
+  -X POST \
+  -d <span class="hljs-string">'{
+  "username": "userone",
+  "password": "s3nh4s3gur4",
+  "email": "one.special@mail.com",
+  "cellphone": "11999999999"
+  }'</span> </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_388dc97cf614482c96ac731d588bff76">&nbsp;</div> <h3 class="request-title"><strong class="post svelte-1qvssvw">POST</strong> Login</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/login/</pre> <div class="description"><h2 id="realizandologinusurio">Realizando login usuário</h2>
+<h4 id="ologinpodeserrealizandocomusernameemailoutelefone">O login pode ser realizando com username, email ou telefone</h4>
+<h4 id="corpodarequisio">Corpo da requisição</h4>
+<pre><code class="json language-json">{
+    "cellphone": "11999999999",
+    "password": "s3nh4s3gur4"
+}
+</code></pre>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<p><strong><em>STATUS 200 OK</em></strong></p>
+<pre><code>{
+    "token": "634b58149e53f797df01769945a40757b12c3188"
+}
+</code></pre></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Content-Type</div> <div class="value svelte-t9o7qk">application/json</div></div> </div> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Body</span> <span class="note svelte-t9o7qk">json</span></div> <div class="raw-data"><pre>{
+  "cellphone": "11999999999",
+  "password": "s3nh4s3gur4"
+}</pre></div> </div></div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/login/"</span> \
+  -H <span class="hljs-string">'Content-Type: application/json'</span> \
+  -X POST \
+  -d <span class="hljs-string">'{
+  "cellphone": "11999999999",
+  "password": "s3nh4s3gur4"
+}'</span> </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_22e31db311a441699f1c2ea433cad433">&nbsp;</div> <h3 class="request-title"><strong class="get svelte-1qvssvw">GET</strong> List All Users</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/users/</pre> <div class="description"><h2 id="listatodososusurios">Lista todos os usuários</h2>
+<h4 id="autenticaonecessria">Autenticação necessária</h4>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<p><strong><em>STATUS 200 CREATED</em></strong></p>
+<pre><code class="json language-json">[
+    {
+        "id": "a8a6dcf4-6028-4994-a068-16e3636f7754",
+        "username": "userone",
+        "email": "one.special@mail.com",
+        "cellphone": "11999999999"
+    },
+]
+</code></pre></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> </div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/users/"</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X GET </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_ff57a89d672148189ba4c97db97b886b">&nbsp;</div> <h3 class="request-title"><strong class="patch svelte-1qvssvw">PATCH</strong> Update User</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/users/{% response 'body', 'req_22e31db311a441699f1c2ea433cad433', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/</pre> <div class="description"><h2 id="recuperandousuriopeloid">Recuperando usuário pelo ID</h2>
+<h4 id="autenticaonecessriaapenasproprietriodaconta">Autenticação necessária (Apenas proprietário da conta)</h4>
+<h4 id="corpodarequisio">Corpo da requisição</h4>
+<pre><code class="json language-json">{
+    "username": "userone.update"
+}
+</code></pre>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<p><strong><em>STATUS 200 OK</em></strong></p>
+<pre><code class="json language-json">{
+    "id": "6f04d614-a777-421c-9de5-f942a2cc9a09",
+    "username": "userone.update",
+    "email": "one.special@mail.com",
+    "cellphone": "11999999999"
+}
+</code></pre></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Content-Type</div> <div class="value svelte-t9o7qk">application/json</div></div> <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Body</span> <span class="note svelte-t9o7qk">json</span></div> <div class="raw-data"><pre>{
+  "username": "userone.update"
+}</pre></div> </div></div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/users/{% response 'body', 'req_22e31db311a441699f1c2ea433cad433', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/"</span> \
+  -H <span class="hljs-string">'Content-Type: application/json'</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X PATCH \
+  -d <span class="hljs-string">'{
+  "username": "userone.update"
+}'</span> </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_718760d273a44e6bbb89b83790b3a425">&nbsp;</div> <h3 class="request-title"><strong class="get svelte-1qvssvw">GET</strong> User ID</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/users/{% response 'body', 'req_22e31db311a441699f1c2ea433cad433', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/</pre> <div class="description"><h2 id="recuperandousuriopeloid">Recuperando usuário pelo ID</h2>
+<h4 id="autenticaonecessriaapenasproprietriodaconta">Autenticação necessária (Apenas proprietário da conta)</h4>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<p><strong><em>STATUS 200 OK</em></strong></p>
+<pre><code class="json language-json">{
+    "id": "a8a6dcf4-6028-4994-a068-16e3636f7754",
+    "username": "userone",
+    "email": "one.special@mail.com",
+    "cellphone": "11999999999"
+}
+</code></pre></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Content-Type</div> <div class="value svelte-t9o7qk">application/json</div></div> <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> </div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/users/{% response 'body', 'req_22e31db311a441699f1c2ea433cad433', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/"</span> \
+  -H <span class="hljs-string">'Content-Type: application/json'</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X GET </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_c5a329a8e6744994873b6a2693c3403a">&nbsp;</div> <h3 class="request-title"><strong class="delete svelte-1qvssvw">DELETE</strong> Delete User</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/users/{% response 'body', 'req_22e31db311a441699f1c2ea433cad433', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/</pre> <div class="description"><h2 id="deletandoumusurio">Deletando um usuário</h2>
+<h4 id="autenticaonecessriaapenasproprietriodaconta">Autenticação necessária (Apenas proprietário da conta)</h4>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<p><strong><em>STATUS 204 NO CONTENT</em></strong></p></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> </div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/users/{% response 'body', 'req_22e31db311a441699f1c2ea433cad433', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/"</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X DELETE </code></pre></div> </div></div><div class="row"><div class="left"><h2>Employees</h2>  <hr></div> <div class="right"></div></div> <div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_2ee61e24f1f24f728de82c874e950c13">&nbsp;</div> <h3 class="request-title"><strong class="post svelte-1qvssvw">POST</strong> Create Employee</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/employees/</pre> <div class="description"><h2 id="criandoumnovofuncionrio">Criando um novo funcionário</h2>
+<ul>
+<li>Opções para o campo DRIVER LICENSE:"A", "B" "C", "D", "E", "AB", "AC", "AD" ou "AE" </li>
+<li>Opções para o campo GENDER: "Not informed" (default), "Male", "Female", "Nonbinary", "Agender" ou "Other".</li>
+</ul>
+<h3 id="autenticaonecessria">Autenticação necessária</h3>
+<h4 id="corpodarequisio">Corpo da Requisição:</h4>
+<pre><code class="json language-json">{
+        "name": "João da Silva",
+        "cpf": "12345678901",
+        "rg": "123456789",
+        "gender": "Male",
+        "driver_license": "AE",
+        "birth_date": "1990-01-01",
+        "salary": 2000,
+        "weekly_workload": "44:00:00",
+        "created_at": "2022-04-11T14:30:00Z",
+        "updated_at": "2022-04-11T14:30:00Z"
+}
+</code></pre>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<p><strong><em>STATUS 201 CREATED</em></strong></p>
+<pre><code class="json language-json">{
+    "id": "c126ff48-ea49-4d39-afe7-286eb8d7f2ff",
+    "departament": "Departament not found.",
+    "name": "João da Silva",
+    "cpf": "12345678901",
+    "rg": "123456789",
+    "gender": "Male",
+    "driver_license": "AE",
+    "birth_date": "1990-01-01",
+    "salary": "2000.00",
+    "weekly_workload": "44:00",
+    "created_at": "2023-04-24T02:06:25.819810Z",
+    "updated_at": "2023-04-24T02:06:25.819841Z"
+}
+</code></pre></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Content-Type</div> <div class="value svelte-t9o7qk">application/json</div></div> <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Body</span> <span class="note svelte-t9o7qk">json</span></div> <div class="raw-data"><pre>{
+  "name": "João da Silva",
+  "cpf": "12345678901",
+  "rg": "123456789",
+  "gender": "Male",
+  "driver_license": "AE",
+  "birth_date": "1990-01-01",
+  "salary": 2000,
+  "weekly_workload": "44:00:00",
+  "created_at": "2022-04-11T14:30:00Z",
+  "updated_at": "2022-04-11T14:30:00Z"
+}</pre></div> </div></div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/employees/"</span> \
+  -H <span class="hljs-string">'Content-Type: application/json'</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X POST \
+  -d <span class="hljs-string">'{
+    "name": "João da Silva",
+    "cpf": "12345678901",
+    "rg": "123456789",
+    "gender": "Male",
+    "driver_license": "AE",
+    "birth_date": "1990-01-01",
+    "salary": 2000,
+    "weekly_workload": "44:00:00",
+    "created_at": "2022-04-11T14:30:00Z",
+    "updated_at": "2022-04-11T14:30:00Z"
+}'</span> </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_a1817de8130d4ef39e8864890f92eff6">&nbsp;</div> <h3 class="request-title"><strong class="get svelte-1qvssvw">GET</strong> List All Employees</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/employees/</pre> <div class="description"><h2 id="listatodososfuncionrios">Lista todos os funcionários</h2>
+<h4 id="autenticaonecessria">Autenticação necessária</h4>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<p><strong><em>STATUS 200 CREATED</em></strong></p>
+<pre><code class="json language-json">[
+    {
+        "id": "3b97288c-d912-41b4-b371-3c2b6438eb6a",
+        "departament": "Departament not found.",
+        "name": "Novo Usuário",
+        "cpf": "13782648780",
+        "rg": "239846420",
+        "gender": "Male",
+        "driver_license": "B",
+        "birth_date": "1992-06-18",
+        "salary": "5000.00",
+        "weekly_workload": "2 02:00:00",
+        "created_at": "2023-04-24T02:06:31.713762Z",
+        "updated_at": "2023-04-24T02:06:31.713796Z"
+    },
+    {
+        "id": "c126ff48-ea49-4d39-afe7-286eb8d7f2ff",
+        "departament": "Departament 01",
+        "name": "João da Silva",
+        "cpf": "12345678901",
+        "rg": "123456789",
+        "gender": "Male",
+        "driver_license": "AE",
+        "birth_date": "1990-01-01",
+        "salary": "2000.00",
+        "weekly_workload": "1 20:00:00",
+        "created_at": "2023-04-24T02:06:25.819810Z",
+        "updated_at": "2023-04-24T02:06:25.819841Z"
+    }
+]
+</code></pre></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> </div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/employees/"</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X GET </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_61749b4d94904299b3b6bf4fc4564073">&nbsp;</div> <h3 class="request-title"><strong class="get svelte-1qvssvw">GET</strong> Retrive Employee</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/employees/{% response 'body', 'req_a1817de8130d4ef39e8864890f92eff6', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/</pre> <div class="description"><h2 id="recuperaumfuncionrio">Recupera um funcionário</h2>
+<h4 id="autenticaonecessria">Autenticação necessária</h4>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<p><strong><em>STATUS 200 OK</em></strong></p>
+<pre><code class="json language-json">{
+    "id": "3b97288c-d912-41b4-b371-3c2b6438eb6a",
+    "departament": "Departament not found.",
+    "name": "Novo Usuário",
+    "cpf": "13782648780",
+    "rg": "239846420",
+    "gender": "Male",
+    "driver_license": "B",
+    "birth_date": "1992-06-18",
+    "salary": "5000.00",
+    "weekly_workload": "50:00",
+    "created_at": "2023-04-24T02:06:31.713762Z",
+    "updated_at": "2023-04-24T02:06:31.713796Z"
+}
+</code></pre></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> </div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/employees/{% response 'body', 'req_a1817de8130d4ef39e8864890f92eff6', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/"</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X GET </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_869a7bcb3deb46a0a6321187d0a744ae">&nbsp;</div> <h3 class="request-title"><strong class="patch svelte-1qvssvw">PATCH</strong> Updated Employee</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/employees/{% response 'body', 'req_a1817de8130d4ef39e8864890f92eff6', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/</pre> <div class="description"><h2 id="atualuzandofuncionrio">Atualuzando funcionário</h2>
+<ul>
+<li>Opções para o campo DRIVER LICENSE:"A", "B" "C", "D", "E", "AB", "AC", "AD" ou "AE" </li>
+<li>Opções para o campo GENDER: "Not informed" (default), "Male", "Female", "Nonbinary", "Agender" ou "Other".</li>
+</ul>
+<h4 id="autenticaonecessria">Autenticação necessária</h4>
+<h4 id="corpodarequisio">Corpo da Requisição:</h4>
+<pre><code class="json language-json">{
+"weekly_workload": "36:00:00"
+}
+</code></pre>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<p><strong><em>STATUS 200 CREATED</em></strong></p>
+<pre><code class="json language-json">{
+    "id": "3b97288c-d912-41b4-b371-3c2b6438eb6a",
+    "departament": "Departament not found.",
+    "name": "Novo Usuário",
+    "cpf": "13782648780",
+    "rg": "239846420",
+    "gender": "Male",
+    "driver_license": "B",
+    "birth_date": "1992-06-18",
+    "salary": "5000.00",
+    "weekly_workload": "36:00",
+    "created_at": "2023-04-24T02:06:31.713762Z",
+    "updated_at": "2023-04-24T02:38:42.363363Z"
+}
+</code></pre></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Content-Type</div> <div class="value svelte-t9o7qk">application/json</div></div> <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Body</span> <span class="note svelte-t9o7qk">json</span></div> <div class="raw-data"><pre>{
+  "weekly_workload": "26:00:00"
+}</pre></div> </div></div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/employees/{% response 'body', 'req_a1817de8130d4ef39e8864890f92eff6', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/"</span> \
+  -H <span class="hljs-string">'Content-Type: application/json'</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X PATCH \
+  -d <span class="hljs-string">'{
+"weekly_workload": "26:00:00"
+}'</span> </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_dde3b162fa13464dbb75d7de604608c5">&nbsp;</div> <h3 class="request-title"><strong class="delete svelte-1qvssvw">DELETE</strong> Delete Employee</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/employees/{% response 'body', 'req_a1817de8130d4ef39e8864890f92eff6', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/</pre> <div class="description"><h2 id="deletandoumfuncionrio">Deletando um funcionário</h2>
+<h3 id="autenticaonecessria">Autenticação necessária</h3>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<p><strong><em>STATUS 204 NO CONTENT</em></strong></p></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> </div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/employees/{% response 'body', 'req_a1817de8130d4ef39e8864890f92eff6', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/"</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X DELETE </code></pre></div> </div></div><div class="row"><div class="left"><h2>Departaments</h2>  <hr></div> <div class="right"></div></div> <div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_b00e70318111422996bcc7f80303f68b">&nbsp;</div> <h3 class="request-title"><strong class="post svelte-1qvssvw">POST</strong> Create Departament</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/departaments/</pre> <div class="description"><h2 id="criandoumdepartamento">Criando um Departamento</h2>
+<h3 id="autenticaonecessria">Autenticação necessária</h3>
+<h4 id="corpodarequisio">Corpo da Requisição:</h4>
+<pre><code class="json language-json">{
+    "title": "Departament 01"
+}
+</code></pre>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<p><strong><em>STATUS 201 CREATED</em></strong></p>
+<pre><code class="json language-json">{
+    "id": "1cd850d3-5309-46dc-bdbe-9f085e48cee8",
+    "title": "Departament 01",
+    "created_at": "2023-04-24T02:07:00.735849Z",
+    "updated_at": "2023-04-24T02:07:00.735884Z"
+}
+</code></pre></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Content-Type</div> <div class="value svelte-t9o7qk">application/json</div></div> <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Body</span> <span class="note svelte-t9o7qk">json</span></div> <div class="raw-data"><pre>{
+  "title": "Departament 01"
+}</pre></div> </div></div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/departaments/"</span> \
+  -H <span class="hljs-string">'Content-Type: application/json'</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X POST \
+  -d <span class="hljs-string">'{
+  "title": "Departament 01"
+}'</span> </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_c591642fb500417c91e54193078a829b">&nbsp;</div> <h3 class="request-title"><strong class="get svelte-1qvssvw">GET</strong> List All Departaments</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/departaments/</pre> <div class="description"><h2 id="listatodososdepartamentos">Lista todos os Departamentos</h2>
+<h3 id="autenticaonecessria">Autenticação necessária</h3>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<p><strong><em>STATUS 200 OK</em></strong></p>
+<pre><code class="json language-json">[
+    {
+        "id": "1cd850d3-5309-46dc-bdbe-9f085e48cee8",
+        "title": "Departament 01",
+        "created_at": "2023-04-24T02:07:00.735849Z",
+        "updated_at": "2023-04-24T02:07:00.735884Z"
+    }
+]
+</code></pre></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> </div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/departaments/"</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X GET </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_1ffe1506a91a41738a3a97d5ab9715e0">&nbsp;</div> <h3 class="request-title"><strong class="post svelte-1qvssvw">POST</strong> Assign an employee to the Department</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/employees/</pre> <div class="description"><h1 id="associaumfuncionrioaumdepartamento">Associa um funcionário a um departamento</h1>
+<h4 id="auteticaonecessria">Auteticação necessária</h4>
+<h4 id="corpodarequisio">Corpo da requisição</h4>
+<pre><code class="json language-json">{
+    "employee": "João da Silva",
+    "role": "Supervisor"
+}
+</code></pre>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<p><strong><em>STATUS 201 CREATED</em></strong></p>
+<pre><code class="json language-json">{
+    "id": "cda6002b-7fc7-4219-a388-d1d76b231ad7",
+    "role": "Supervisor",
+    "employee": "João da Silva",
+    "departament": "Departament 01"
+}
+</code></pre></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Content-Type</div> <div class="value svelte-t9o7qk">application/json</div></div> <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Body</span> <span class="note svelte-t9o7qk">json</span></div> <div class="raw-data"><pre>{
+  "employee": "João da Silva",
+  "role": "Supervisor"
+}</pre></div> </div></div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/employees/"</span> \
+  -H <span class="hljs-string">'Content-Type: application/json'</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X POST \
+  -d <span class="hljs-string">'{
+    "employee": "João da Silva",
+    "role": "Supervisor"
+}'</span> </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_e62af1d175ce40628ac3af1e2af79dff">&nbsp;</div> <h3 class="request-title"><strong class="get svelte-1qvssvw">GET</strong> List Employees Departament 01</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/employees/</pre> <div class="description"><h2 id="listatodososfuncionrios">Lista todos os funcionários</h2>
+<h4 id="autenticaonecessria">Autenticação necessária</h4>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<p><strong><em>STATUS 200 CREATED</em></strong></p>
+<pre><code class="json language-json">[
+    {
+        "id": "5336b3f8-b33f-4a06-921c-d478d085aa24",
+        "role": "Supervisor",
+        "employee": "Novo Usuário",
+        "departament": "Departament 01"
+    },
+    {
+        "id": "962728d5-4b9c-4fd4-8c78-ce03d791a091",
+        "role": "Employee",
+        "employee": "João da Silva",
+        "departament": "Departament 01"
+    }
+]
+</code></pre></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Content-Type</div> <div class="value svelte-t9o7qk">application/json</div></div> <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> </div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/employees/"</span> \
+  -H <span class="hljs-string">'Content-Type: application/json'</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X GET </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_41518e7f74c048a1907738b5e57998b4">&nbsp;</div> <h3 class="request-title"><strong class="patch svelte-1qvssvw">PATCH</strong> Update Employee Departament 01</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/employees/{% response 'body', 'req_a1817de8130d4ef39e8864890f92eff6', 'b64::JFswXS5pZA==::46b', 'never', 60 %}/</pre>  <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Content-Type</div> <div class="value svelte-t9o7qk">application/json</div></div> <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Body</span> <span class="note svelte-t9o7qk">json</span></div> <div class="raw-data"><pre>{
+  "role": "Employee"
+}</pre></div> </div></div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/employees/{% response 'body', 'req_a1817de8130d4ef39e8864890f92eff6', 'b64::JFswXS5pZA==::46b', 'never', 60 %}/"</span> \
+  -H <span class="hljs-string">'Content-Type: application/json'</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X PATCH \
+  -d <span class="hljs-string">'{
+    "role": "Employee"
+}'</span> </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_819aebbe34fb4418b255020a25368ec1">&nbsp;</div> <h3 class="request-title"><strong class="delete svelte-1qvssvw">DELETE</strong> Delete Employee in Departament 01</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/employees/{% response 'body', 'req_a1817de8130d4ef39e8864890f92eff6', 'b64::JC5bMF0uaWQ=::46b', 'always', 60 %}/</pre> <div class="description"><h2 id="deletandoumfuncionriodedepartamento">Deletando um funcionário de departamento</h2>
+<h3 id="autenticaonecessria">Autenticação necessária</h3>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<p><strong><em>STATUS 204 NO CONTENT</em></strong></p></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> </div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/employees/{% response 'body', 'req_a1817de8130d4ef39e8864890f92eff6', 'b64::JC5bMF0uaWQ=::46b', 'always', 60 %}/"</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X DELETE </code></pre></div> </div></div><div class="row"><div class="left"><h2>Projects</h2>  <hr></div> <div class="right"></div></div> <div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_75d2561250a349068af36c8c9bd0c96e">&nbsp;</div> <h3 class="request-title"><strong class="get svelte-1qvssvw">GET</strong> All Projects</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/projects/</pre> <div class="description"><h2 id="listatodososprojetos">Lista todos os Projetos</h2>
+<h3 id="autenticaonecessria">Autenticação necessária</h3>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<p><strong><em>STATUS 200 OK</em></strong></p>
+<pre><code class="json language-json">[
+    {
+        "id": "883434c5-439b-4e31-980b-ac2142f1f23b",
+        "title": "My Project 01",
+        "last_hours": "150:00",
+        "departament": "1f28d5e5-9bf4-4dd2-8285-e36db957c6fd",
+        "estimed_date": "2023-04-26",
+        "date_last_estimate_calc": "2023-04-26T05:13:47.096073Z",
+        "completed_hours": "00:00",
+        "created_at": "2023-04-26T05:10:48.695455Z"
+    },
+    {
+        "id": "96f4dd83-0ddf-407f-92f8-38fb14062dc1",
+        "title": "My Project 02",
+        "last_hours": "72:00",
+        "departament": "1f28d5e5-9bf4-4dd2-8285-e36db957c6fd",
+        "estimed_date": "2023-05-08",
+        "date_last_estimate_calc": "2023-04-26T05:11:44.537500Z",
+        "completed_hours": "00:00",
+        "created_at": "2023-04-26T05:11:44.537534Z"
+    },
+    {
+        "id": "bc6129a6-7ce7-45c8-af18-7bc6c15205b0",
+        "title": "My Project 03",
+        "last_hours": "30:00",
+        "departament": "1f28d5e5-9bf4-4dd2-8285-e36db957c6fd",
+        "estimed_date": "2023-05-01",
+        "date_last_estimate_calc": "2023-04-26T05:11:48.787925Z",
+        "completed_hours": "00:00",
+        "created_at": "2023-04-26T05:11:48.787971Z"
+    }
+]
+</code></pre></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> </div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/projects/"</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X GET </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_1909f25e956540b5b5d0e379981ef078">&nbsp;</div> <h3 class="request-title"><strong class="delete svelte-1qvssvw">DELETE</strong> Delete Project</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/departaments/{% response 'body', 'req_b00e70318111422996bcc7f80303f68b', 'b64::JC5pZA==::46b', 'never', 60 %}/projects/{% response 'body', 'req_75d2561250a349068af36c8c9bd0c96e', 'b64::JC5bMF0uaWQ=::46b', 'always', 60 %}/</pre> <div class="description"><h2 id="deletandoumprojeto">Deletando um Projeto</h2>
+<h3 id="autenticaonecessria">Autenticação necessária</h3>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<p><strong><em>STATUS 204 NO CONTENT</em></strong></p></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> </div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/departaments/{% response 'body', 'req_b00e70318111422996bcc7f80303f68b', 'b64::JC5pZA==::46b', 'never', 60 %}/projects/{% response 'body', 'req_75d2561250a349068af36c8c9bd0c96e', 'b64::JC5bMF0uaWQ=::46b', 'always', 60 %}/"</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X DELETE </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_f7383c13b2fa4b4bb69e6ad3f57538a0">&nbsp;</div> <h3 class="request-title"><strong class="get svelte-1qvssvw">GET</strong> Project  ID</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'never', 60 %}/projects/{% response 'body', 'req_75d2561250a349068af36c8c9bd0c96e', 'b64::JC5bMF0uaWQ=::46b', 'never', 60 %}/</pre> <div class="description"><h2 id="recuperandoprojetoporid">Recuperando Projeto por ID</h2>
+<h3 id="autenticaonecessria">Autenticação necessária</h3>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<p><strong><em>STATUS 200 OK</em></strong></p>
+<pre><code class="json language-json">{
+    "id": "e76f4b6d-cb92-4395-be5e-584c12c29bee",
+    "title": "My Project 01",
+    "last_hours": "20:00",
+    "departament": "Departament 01",
+    "estimed_date": "2023-04-28",
+    "date_last_estimate_calc": "2023-04-26T13:37:19.452126Z",
+    "supervisor": "João da Silva",
+    "completed_hours": "00:00"
+}
+</code></pre></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> </div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'never', 60 %}/projects/{% response 'body', 'req_75d2561250a349068af36c8c9bd0c96e', 'b64::JC5bMF0uaWQ=::46b', 'never', 60 %}/"</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X GET </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_cc8de6b826c94bebb60749cdfbbc4530">&nbsp;</div> <h3 class="request-title"><strong class="post svelte-1qvssvw">POST</strong> Create Project 01</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/projects/</pre> <div class="description"><h2 id="associandoumfuncionrioaumprojeto">Associando um funcionário a um projeto</h2>
+<h3 id="autenticaonecessria">Autenticação necessária</h3>
+<h4 id="corpodarequisio">Corpo da Requisição:</h4>
+<pre><code class="json language-json">{
+    "supervisor": "João da Silva",
+        "title": "My Project 01",
+    "last_hours": "10:00"
+}
+</code></pre>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<p><strong><em>STATUS 201 CREATED</em></strong></p>
+<pre><code class="json language-json">{
+    "id": "e76f4b6d-cb92-4395-be5e-584c12c29bee",
+    "title": "My Project 01",
+    "last_hours": "20:00",
+    "departament": "Departament 01",
+    "estimed_date": "2023-04-28",
+    "date_last_estimate_calc": "2023-04-26T13:37:19.452126Z",
+    "supervisor": "João da Silva",
+    "completed_hours": "00:00"
+}
+</code></pre></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Content-Type</div> <div class="value svelte-t9o7qk">application/json</div></div> <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Body</span> <span class="note svelte-t9o7qk">json</span></div> <div class="raw-data"><pre>{
+  "supervisor": "João da Silva",
+  "title": "My Project 01",
+  "last_hours": "20:00",
+  "created_at": "2023-01-15"
+}</pre></div> </div></div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/projects/"</span> \
+  -H <span class="hljs-string">'Content-Type: application/json'</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X POST \
+  -d <span class="hljs-string">'{
+    "supervisor": "João da Silva",
+    "title": "My Project 01",
+    "last_hours": "20:00",
+    "created_at": "2023-01-15"
+}'</span> </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_843575e7c15b441ca8a16263517f4c13">&nbsp;</div> <h3 class="request-title"><strong class="patch svelte-1qvssvw">PATCH</strong> Update Project</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/departaments/{% response 'body', 'req_b00e70318111422996bcc7f80303f68b', 'b64::JC5pZA==::46b', 'never', 60 %}/projects/{% response 'body', 'req_75d2561250a349068af36c8c9bd0c96e', 'b64::JC5bMF0uaWQ=::46b', 'always', 60 %}/</pre> <div class="description"><h2 id="atualuzandoprojetonofuncionrio">Atualuzando projeto no funcionário</h2>
+<h4 id="autenticaonecessria">Autenticação necessária</h4>
+<h4 id="corpodarequisio">Corpo da Requisição:</h4>
+<pre><code class="json language-json">{
+  "last_hours": "100:00"
+}
+</code></pre>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<pre><code class="json language-json">{
+    "id": "e76f4b6d-cb92-4395-be5e-584c12c29bee",
+    "title": "My Project 01",
+    "last_hours": "100:00",
+    "departament": "Departament 01",
+    "estimed_date": "2023-04-26",
+    "date_last_estimate_calc": "2023-04-26T13:41:11.535051Z",
+    "supervisor": "Supervisor not found.",
+    "completed_hours": "00:00"
+}
+</code></pre></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Content-Type</div> <div class="value svelte-t9o7qk">application/json</div></div> <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Body</span> <span class="note svelte-t9o7qk">json</span></div> <div class="raw-data"><pre>{
+  "last_hours": "100:00"
+}</pre></div> </div></div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/departaments/{% response 'body', 'req_b00e70318111422996bcc7f80303f68b', 'b64::JC5pZA==::46b', 'never', 60 %}/projects/{% response 'body', 'req_75d2561250a349068af36c8c9bd0c96e', 'b64::JC5bMF0uaWQ=::46b', 'always', 60 %}/"</span> \
+  -H <span class="hljs-string">'Content-Type: application/json'</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X PATCH \
+  -d <span class="hljs-string">'{
+  "last_hours": "100:00"
+}'</span> </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_98a78ab57f2e48f5a84b5eb0dd4d7447">&nbsp;</div> <h3 class="request-title"><strong class="post svelte-1qvssvw">POST</strong> Associate Employee with Project</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/projects/{% response 'body', 'req_75d2561250a349068af36c8c9bd0c96e', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/employees/</pre> <div class="description"><h2 id="associaumfuncionroaoprojeto">Associa um funcionáro ao Projeto</h2>
+<ul>
+<li>Opções para o campo EMPLOYEE :"Employee" ou "Supervisor"</li>
+</ul>
+<h4 id="autenticaonecessria">Autenticação necessária</h4>
+<h4 id="corpodarequisio">Corpo da requisição</h4>
+<pre><code class="json language-json">{
+    "employee": "João da Silva",
+    "role": "Employee"
+}
+</code></pre>
+<h4 id="retornoesperado">Retorno esperado</h4>
+<p><strong><em>STATUS 201 CREATED</em></strong></p>
+<pre><code class="json language-json">{
+    "id": "3bd942a0-5eaf-441c-9bf9-d7b3f1e7de22",
+    "role": "Employee",
+    "employee_name": "João da Silva"
+}
+</code></pre></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Content-Type</div> <div class="value svelte-t9o7qk">application/json</div></div> <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Body</span> <span class="note svelte-t9o7qk">json</span></div> <div class="raw-data"><pre>{
+  "employee": "João da Silva",
+  "role": "Employee"
+}</pre></div> </div></div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/projects/{% response 'body', 'req_75d2561250a349068af36c8c9bd0c96e', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/employees/"</span> \
+  -H <span class="hljs-string">'Content-Type: application/json'</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X POST \
+  -d <span class="hljs-string">'{
+    "employee": "João da Silva",
+    "role": "Employee"
+}'</span> </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_f9efb499bd154291bd32fa1262c357bd">&nbsp;</div> <h3 class="request-title"><strong class="get svelte-1qvssvw">GET</strong> List Employees in Project</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/projects/{% response 'body', 'req_75d2561250a349068af36c8c9bd0c96e', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/employees/</pre> <div class="description"><h2 id="listaosfuncionriosassociadosaoprojeto">Lista os funcionários associados ao Projeto</h2>
+<h4 id="autenticaonecessria">Autenticação necessária</h4>
+<h4 id="respostaesperada">Resposta esperada</h4>
+<p><strong><em>STATUS 200 OK</em></strong></p>
+<pre><code class="json language-json">[
+    {
+        "id": "3bd942a0-5eaf-441c-9bf9-d7b3f1e7de22",
+        "role": "Employee",
+        "employee_name": "João da Silva"
+    },
+    {
+        "id": "bf4022fb-2e4e-4ef4-80dc-b7a52b8f562b",
+        "role": "Supervisor",
+        "employee_name": "Novo Usuário"
+
+    }
+]
+</code></pre></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> </div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/projects/{% response 'body', 'req_75d2561250a349068af36c8c9bd0c96e', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/employees/"</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X GET </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_315ee15b4554445885c297aa1645b87e">&nbsp;</div> <h3 class="request-title"><strong class="get svelte-1qvssvw">GET</strong> Retrive Employee Project</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/projects/{% response 'body', 'req_75d2561250a349068af36c8c9bd0c96e', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/employees/{% response 'body', 'req_a1817de8130d4ef39e8864890f92eff6', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/</pre> <div class="description"><h2 id="recuperafuncionrioassociadoaoprojetopeloid">Recupera funcionário associado ao Projeto pelo ID</h2>
+<h4 id="autenticaonecessria">Autenticação necessária</h4>
+<h4 id="respostaesperada">Resposta esperada</h4>
+<p><strong><em>STATUS 200 OK</em></strong></p>
+<pre><code class="json language-json">{
+    "name": "João da Silva",
+    "weekly_workload": "44:00",
+    "driver_license": "AE",
+    "departament": "Departament 01",
+    "project": "My Project 01"
+}
+</code></pre></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> </div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/projects/{% response 'body', 'req_75d2561250a349068af36c8c9bd0c96e', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/employees/{% response 'body', 'req_a1817de8130d4ef39e8864890f92eff6', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/"</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X GET </code></pre></div> </div></div><div class="row"><div class="left"><div class="anchor svelte-1qvssvw" id="req_507b53e3394c41a38d1aa68588e1d7f0">&nbsp;</div> <h3 class="request-title"><strong class="delete svelte-1qvssvw">DELETE</strong> Delete Employee Project</h3> <pre class="url svelte-1qvssvw">http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/projects/{% response 'body', 'req_75d2561250a349068af36c8c9bd0c96e', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/employees/{% response 'body', 'req_a1817de8130d4ef39e8864890f92eff6', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/</pre> <div class="description"><h2 id="excluiassociaodofuncionrioaoprojeto">Exclui associação do funcionário ao Projeto</h2>
+<h4 id="autenticaonecessria">Autenticação necessária</h4>
+<h4 id="respostaesperada">Resposta esperada</h4>
+<p><strong><em>STATUS 204 NO CONTENT</em></strong></p></div> <div class="tables"> <div class="table svelte-t9o7qk"><div class="header svelte-t9o7qk"><span class="title svelte-t9o7qk">Headers</span> </div>  <div class="row svelte-t9o7qk"><div class="name svelte-t9o7qk">Authorization</div> <div class="value svelte-t9o7qk"><pre>Token {% response 'body', 'req_388dc97cf614482c96ac731d588bff76', 'b64::JC50b2tlbg==::46b', 'always', 60 %}</pre></div></div> </div> </div> <hr></div> <div class="right"><div class="code-example svelte-1qvssvw"><div class="header svelte-1qvssvw"><div class="title svelte-1qvssvw">Example request:</div> <div class="copy"><span class="svelte-1qvssvw">Copy to clipboard</span></div></div> <pre class="svelte-1qvssvw"><code class="curl hljs">curl <span class="hljs-string">"http://localhost:8000/departaments/{% response 'body', 'req_c591642fb500417c91e54193078a829b', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/projects/{% response 'body', 'req_75d2561250a349068af36c8c9bd0c96e', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/employees/{% response 'body', 'req_a1817de8130d4ef39e8864890f92eff6', 'b64::JFswXS5pZA==::46b', 'always', 60 %}/"</span> \
+  -H <span class="hljs-string">'Authorization: Token {% response '</span>body<span class="hljs-string">', '</span>req_388dc97cf614482c96ac731d588bff76<span class="hljs-string">', '</span>b64::JC50b2tlbg==::46b<span class="hljs-string">', '</span>always<span class="hljs-string">', 60 %}'</span> \
+  -X DELETE </code></pre></div> </div></div></section></section></div>
+
+
+</body></html>
