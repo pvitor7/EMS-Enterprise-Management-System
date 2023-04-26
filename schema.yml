@@ -1,0 +1,1257 @@
+openapi: 3.0.3
+info:
+  title: EMS - Enterprise Management System
+  version: 1.0.0
+  description: O sistema de gerenciamento empresarial é uma aplicação que foi desenvolvida
+    com o objetivo de atender às necessidades de gestão de uma empresa.
+paths:
+  /departaments/:
+    get:
+      operationId: departaments_list
+      tags:
+      - departaments
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Departament'
+          description: ''
+    post:
+      operationId: departaments_create
+      tags:
+      - departaments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Departament'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Departament'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Departament'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Departament'
+          description: ''
+  /departaments/{departament_id}/employees/:
+    get:
+      operationId: departaments_employees_list
+      parameters:
+      - in: path
+        name: departament_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - departaments
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GETDepartamentEmployee'
+          description: ''
+    post:
+      operationId: departaments_employees_create
+      parameters:
+      - in: path
+        name: departament_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - departaments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DepartamentEmployee'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DepartamentEmployee'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DepartamentEmployee'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepartamentEmployee'
+          description: ''
+  /departaments/{departament_id}/employees/{id}/:
+    get:
+      operationId: departaments_employees_retrieve
+      parameters:
+      - in: path
+        name: departament_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this roles.
+        required: true
+      tags:
+      - departaments
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GETDepartamentEmployee'
+          description: ''
+    put:
+      operationId: departaments_employees_update
+      parameters:
+      - in: path
+        name: departament_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this roles.
+        required: true
+      tags:
+      - departaments
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+    patch:
+      operationId: departaments_employees_partial_update
+      parameters:
+      - in: path
+        name: departament_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this roles.
+        required: true
+      tags:
+      - departaments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDepartamentEmployee'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDepartamentEmployee'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDepartamentEmployee'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepartamentEmployee'
+          description: ''
+    delete:
+      operationId: departaments_employees_destroy
+      parameters:
+      - in: path
+        name: departament_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this roles.
+        required: true
+      tags:
+      - departaments
+      security:
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /departaments/{departament_id}/projects/:
+    get:
+      operationId: departaments_projects_list
+      parameters:
+      - in: path
+        name: departament_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - departaments
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+          description: ''
+    post:
+      operationId: departaments_projects_create
+      parameters:
+      - in: path
+        name: departament_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - departaments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Project'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Project'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: ''
+  /departaments/{departament_id}/projects/{id}/:
+    get:
+      operationId: departaments_projects_retrieve
+      parameters:
+      - in: path
+        name: departament_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this project.
+        required: true
+      tags:
+      - departaments
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: ''
+    put:
+      operationId: departaments_projects_update
+      parameters:
+      - in: path
+        name: departament_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this project.
+        required: true
+      tags:
+      - departaments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Project'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Project'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: ''
+    patch:
+      operationId: departaments_projects_partial_update
+      parameters:
+      - in: path
+        name: departament_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this project.
+        required: true
+      tags:
+      - departaments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProject'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedProject'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedProject'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: ''
+    delete:
+      operationId: departaments_projects_destroy
+      parameters:
+      - in: path
+        name: departament_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this project.
+        required: true
+      tags:
+      - departaments
+      security:
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /departaments/{departament_id}/projects/{id}/employees/:
+    get:
+      operationId: departaments_projects_employees_list
+      parameters:
+      - in: path
+        name: departament_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this projects employees.
+        required: true
+      tags:
+      - departaments
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectEmployee'
+          description: ''
+    post:
+      operationId: departaments_projects_employees_create
+      parameters:
+      - in: path
+        name: departament_id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this projects employees.
+        required: true
+      tags:
+      - departaments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectEmployee'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ProjectEmployee'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProjectEmployee'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectEmployee'
+          description: ''
+  /departaments/{id}/:
+    get:
+      operationId: departaments_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this departament.
+        required: true
+      tags:
+      - departaments
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Departament'
+          description: ''
+    put:
+      operationId: departaments_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this departament.
+        required: true
+      tags:
+      - departaments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Departament'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Departament'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Departament'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Departament'
+          description: ''
+    patch:
+      operationId: departaments_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this departament.
+        required: true
+      tags:
+      - departaments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDepartament'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDepartament'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDepartament'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Departament'
+          description: ''
+    delete:
+      operationId: departaments_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this departament.
+        required: true
+      tags:
+      - departaments
+      security:
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /employees/:
+    get:
+      operationId: employees_list
+      tags:
+      - employees
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee'
+          description: ''
+    post:
+      operationId: employees_create
+      tags:
+      - employees
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Employee'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Employee'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+          description: ''
+  /employees/{id}/:
+    get:
+      operationId: employees_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this employees.
+        required: true
+      tags:
+      - employees
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+          description: ''
+    put:
+      operationId: employees_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this employees.
+        required: true
+      tags:
+      - employees
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Employee'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Employee'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+          description: ''
+    patch:
+      operationId: employees_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this employees.
+        required: true
+      tags:
+      - employees
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEmployee'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEmployee'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEmployee'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+          description: ''
+    delete:
+      operationId: employees_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this employees.
+        required: true
+      tags:
+      - employees
+      security:
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /login/:
+    post:
+      operationId: login_create
+      tags:
+      - login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Login'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Login'
+          description: ''
+  /users/:
+    get:
+      operationId: users_list
+      tags:
+      - users
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+          description: ''
+  /users/{id}/:
+    get:
+      operationId: users_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this user.
+        required: true
+      tags:
+      - users
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    put:
+      operationId: users_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this user.
+        required: true
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    patch:
+      operationId: users_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this user.
+        required: true
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    delete:
+      operationId: users_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this user.
+        required: true
+      tags:
+      - users
+      security:
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /users/register/:
+    post:
+      operationId: users_register_create
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+components:
+  schemas:
+    Departament:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          type: string
+          maxLength: 48
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - id
+      - title
+      - updated_at
+    DepartamentEmployee:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+        employee:
+          type: string
+      required:
+      - employee
+      - id
+    DriverLicenseEnum:
+      enum:
+      - Not informed
+      - A
+      - B
+      - C
+      - D
+      - E
+      - AB
+      - AC
+      - AD
+      - AE
+      type: string
+      description: |-
+        * `Not informed` - Default
+        * `A` - A
+        * `B` - B
+        * `C` - C
+        * `D` - D
+        * `E` - E
+        * `AB` - Ab
+        * `AC` - Ac
+        * `AD` - Ad
+        * `AE` - Ae
+    Employee:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        departament:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 128
+        cpf:
+          type: string
+          maxLength: 11
+        rg:
+          type: string
+          maxLength: 9
+        gender:
+          $ref: '#/components/schemas/GenderEnum'
+        driver_license:
+          $ref: '#/components/schemas/DriverLicenseEnum'
+        birth_date:
+          type: string
+          format: date
+        salary:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,6}(?:\.\d{0,2})?$
+        weekly_workload:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - birth_date
+      - cpf
+      - created_at
+      - departament
+      - id
+      - name
+      - rg
+      - updated_at
+      - weekly_workload
+    GETDepartamentEmployee:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+        employee:
+          type: string
+          readOnly: true
+      required:
+      - employee
+      - id
+    GenderEnum:
+      enum:
+      - Not informed
+      - Male
+      - Female
+      - Nonbinary
+      - Agender
+      - Other
+      type: string
+      description: |-
+        * `Not informed` - Default
+        * `Male` - Male
+        * `Female` - Felame
+        * `Nonbinary` - Nonbinary
+        * `Agender` - Agender
+        * `Other` - Other
+    Login:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+      required:
+      - password
+      - username
+    PatchedDepartament:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          type: string
+          maxLength: 48
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedDepartamentEmployee:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+        employee:
+          type: string
+    PatchedEmployee:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        departament:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 128
+        cpf:
+          type: string
+          maxLength: 11
+        rg:
+          type: string
+          maxLength: 9
+        gender:
+          $ref: '#/components/schemas/GenderEnum'
+        driver_license:
+          $ref: '#/components/schemas/DriverLicenseEnum'
+        birth_date:
+          type: string
+          format: date
+        salary:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,6}(?:\.\d{0,2})?$
+        weekly_workload:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedProject:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          type: string
+          maxLength: 48
+        last_hours:
+          type: string
+        departament:
+          type: string
+          format: uuid
+          nullable: true
+        estimed_date:
+          type: string
+          format: date
+          readOnly: true
+        date_last_estimate_calc:
+          type: string
+          format: date
+          readOnly: true
+        supervisor:
+          type: string
+          readOnly: true
+        completed_hours:
+          type: string
+          readOnly: true
+          nullable: true
+    PatchedUser:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        password:
+          type: string
+          writeOnly: true
+        cellphone:
+          type: string
+          maxLength: 12
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          type: string
+          maxLength: 48
+        last_hours:
+          type: string
+        departament:
+          type: string
+          format: uuid
+          nullable: true
+        estimed_date:
+          type: string
+          format: date
+          readOnly: true
+        date_last_estimate_calc:
+          type: string
+          format: date
+          readOnly: true
+        supervisor:
+          type: string
+          readOnly: true
+        completed_hours:
+          type: string
+          readOnly: true
+          nullable: true
+      required:
+      - completed_hours
+      - date_last_estimate_calc
+      - estimed_date
+      - id
+      - last_hours
+      - supervisor
+      - title
+    ProjectEmployee:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+        employee:
+          type: string
+      required:
+      - employee
+      - id
+    RoleEnum:
+      enum:
+      - Employee
+      - Supervisor
+      type: string
+      description: |-
+        * `Employee` - Default
+        * `Supervisor` - Supervisor
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        password:
+          type: string
+          writeOnly: true
+        cellphone:
+          type: string
+          maxLength: 12
+      required:
+      - cellphone
+      - email
+      - id
+      - password
+      - username
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
