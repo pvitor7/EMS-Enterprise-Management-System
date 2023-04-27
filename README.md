@@ -20,7 +20,7 @@ Para garantir uma maior compatibilidade, as duas partes foram implementadas em c
 As informações sobre os endpoints e opções da aplicação podem ser encontradas no link da documentação:
 
 
-https://pvitor7.github.io/EMS---Documentation/#req_e62af1d175ce40628ac3af1e2af79dff
+<a href="https://pvitor7.github.io/EMS---Documentation/#req_e62af1d175ce40628ac3af1e2af79dff" target="_blank">https://pvitor7.github.io/EMS---Documentation/#req_e62af1d175ce40628ac3af1e2af79dff</a>
 
 
 
