@@ -7,7 +7,7 @@
 </h3>
 
 
-O Sistema de Gerenciamento Empresarial é uma aplicação que foi desenvolvida com o objetivo de atender às necessidades de gestão de uma empresa. Ele consiste em duas partes, uma que utiliza o MySQL como banco de dados e outra que utiliza o Python e o Django para a criação de uma API Rest. 
+O Sistema de Gerenciamento Empresarial é uma aplicação que foi desenvolvida com o objetivo de atender às necessidades de gestão de uma empresa. Ele consiste em duas partes, uma que utiliza o MySQL como banco de dados e outra que utiliza o Python e o Django para a criação de uma API Rest.
 
 Para garantir uma maior compatibilidade, as duas partes foram implementadas em contêineres Docker, seguindo as melhores práticas de desenvolvimento de software. Além disso, também foram desenvolvidos testes para garantir a qualidade e integridade do código.
 
@@ -100,7 +100,7 @@ Dentro do  o projeto  crie um arquivo **.env**, copiando o formato do arquivo **
 ##### 6. Rode o projeto.
 Após o preenchimento das variáveis de ambiente, execute o seguinte comando.
 
-###### - OBS: o Mysql utilizará por padrão a porta 3306, e o Django a porta 8000, é importante garantir que ambas estejam disponíveis para a execução do projeto
+***- OBS: o Docker utilizará por padrão a porta 3306 para o MySql, e pro Django a porta 8000, é importante garantir que ambas estejam disponíveis para a execução docker-compose.***
   
 ```
     docker compose up
@@ -109,3 +109,10 @@ Após o preenchimento das variáveis de ambiente, execute o seguinte comando.
 Ele cria os containers necessários para a execução do projeto, que estará disponível na porta 8000 no endereço: http://localhost:8000/.
 
 
+##### 7. Testes.
+A aplicação também conta com testes (em desenvolvimento), que podem ser executados com o seguinte comando:
+
+```
+./manage.py test 
+```
+<br/>
