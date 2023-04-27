@@ -38,23 +38,24 @@ class CalculateTime:
     def calculate_hours_project(self, project, new_employee=None):
         employees_in_project = ProjectsEmployees.objects.filter(project=project)
         number_employees = len(employees_in_project)
+        
         if new_employee:
             number_employees += 1
-        new_total_hours = 0;
+        
         if number_employees > 0:
-            for employee_in_project in employees_in_project:
-                if employee_in_project.employee:
-                    created_at_local = timezone.localtime(employee_in_project.employee.created_at)
-                    time_diff = timezone.now() - created_at_local
-                    new_total_hours += 8 * time_diff.days
-                    
+            new_total_hours = sum([
+                (timezone.now() - timezone.localtime(emp.employee.created_at)).days * 8
+                for emp in employees_in_project if emp.employee
+            ])
+        else:
+            new_total_hours = 0
+        
         if new_total_hours == 0:
             return timedelta(seconds=0)
-        elif new_total_hours > project.last_hours:
+        elif new_total_hours > project.last_hours.total_seconds() / 3600:
             return project.last_hours
         else:
             return timedelta(hours=new_total_hours)
-
 
     #faz a estimativa de data de conclusão baseada nas horas do projeto e data inicial
     def convert_days_hours_minutes(self, time_delta_str, time_start=date.today()):

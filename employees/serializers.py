@@ -4,6 +4,7 @@ from departaments.models import Departament, Roles
 from projects.models import ProjectsEmployees, Project
 from django.db import transaction
 from projects.utils import CalculateTime
+from django.forms.models import model_to_dict
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
@@ -23,19 +24,56 @@ class EmployeeSerializer(serializers.ModelSerializer):
         data = super().to_representation(instance)
         data['weekly_workload'] = CalculateTime.timedelta_to_str(self, instance.weekly_workload)
         return data
-        
-
-class RetriveDepartamentEmployeeSerializer(serializers.ModelSerializer):
+         
+    
+ 
+class ProjectEmployeeIDSerializer(serializers.ModelSerializer):
+    departament = serializers.SerializerMethodField();
+    project = serializers.SerializerMethodField();
     class Meta:
         model = Employees
-        fields = '__all__'
-
+        fields = ['name', 'weekly_workload', 'driver_license', 'departament', 'project']
+    
     def to_representation(self, instance):
         data = super().to_representation(instance)
         data['weekly_workload'] = CalculateTime.timedelta_to_str(self, instance.weekly_workload)
         return data
+        
+    def get_departament(self, obj):
+        departament_id = self.context['view'].kwargs.get('departament_id')
+        departament = Departament.objects.get(id=departament_id)
+        return departament.title
     
-
+    def get_project(self, obj):
+        project_id = self.context['view'].kwargs.get('project_id')
+        project = Project.objects.get(id=project_id)
+        return project.title    
+    
+    def validate(self, data):
+        departament_id = self.context['view'].kwargs.get('departament_id')
+        if not departament_id:
+            raise serializers.ValidationError({'detail': 'Departament required.'})
+        project_id = self.context['view'].kwargs.get('project_id')
+        if not project_id:
+            raise serializers.ValidationError({'detail': 'Project required.'})
+        pk = self.context['view'].kwargs.get('pk')
+        if not pk:
+            raise serializers.ValidationError({'detail': 'User ID required.'})
+        
+        employee = ProjectsEmployees.objects.filter(project=project_id, employee=pk).first();
+        
+        project = Project.objects.filter(id=project_id, departament=departament_id).first()
+        
+        if not project:
+            raise serializers.ValidationError({'detail': 'Project not found in departament.'})
+        
+        if not employee:
+            raise serializers.ValidationError({'detail': 'User not found im project.'})
+        
+        return data
+     
+    
+    
 class GETDepartamentEmployeeSerializer(serializers.ModelSerializer):
     departament = serializers.SerializerMethodField();
     employee = serializers.SerializerMethodField();
@@ -115,52 +153,5 @@ class DepartamentEmployeeSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({"detail": "Employee not associated with the project."});
         return emplooye_associated;
     
-    
- 
-class ProjectEmployeeIDSerializer(serializers.ModelSerializer):
-    departament = serializers.SerializerMethodField();
-    project = serializers.SerializerMethodField();
-    class Meta:
-        model = Employees
-        fields = ['name', 'weekly_workload', 'driver_license', 'departament', 'project']
-    
-    def to_representation(self, instance):
-        data = super().to_representation(instance)
-        data['weekly_workload'] = CalculateTime.timedelta_to_str(self, instance.weekly_workload)
-        return data
-    
-    
-    def get_departament(self, obj):
-        departament_id = self.context['view'].kwargs.get('departament_id')
-        departament = Departament.objects.get(id=departament_id)
-        return departament.title
-    
-    def get_project(self, obj):
-        project_id = self.context['view'].kwargs.get('project_id')
-        project = Project.objects.get(id=project_id)
-        return project.title    
-    
-    def validate(self, data):
-        departament_id = self.context['view'].kwargs.get('departament_id')
-        if not departament_id:
-            raise serializers.ValidationError({'detail': 'Departament required.'})
-        project_id = self.context['view'].kwargs.get('project_id')
-        if not project_id:
-            raise serializers.ValidationError({'detail': 'Project required.'})
-        pk = self.context['view'].kwargs.get('pk')
-        if not pk:
-            raise serializers.ValidationError({'detail': 'User ID required.'})
-        
-        employee = ProjectsEmployees.objects.filter(project=project_id, employee=pk).first();
-        
-        project = Project.objects.filter(id=project_id, departament=departament_id).first()
-        
-        if not project:
-            raise serializers.ValidationError({'detail': 'Project not found in departament.'})
-        
-        if not employee:
-            raise serializers.ValidationError({'detail': 'User not found im project.'})
-        
-        return data
-     
+
      

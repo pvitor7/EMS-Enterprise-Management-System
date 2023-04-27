@@ -9,18 +9,11 @@ class DepartamentSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
 
-# class RolesSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Roles
-#         fields = ['id', 'title', 'departament']
-        
-
 class DepartamentEmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employees
         fields = ['name']
-        
-            
+                    
     def validate(self, data):
         departament_id = self.context['view'].kwargs.get('departament_id')
         employee_id = self.context['view'].kwargs.get('pk')
@@ -30,7 +23,7 @@ class DepartamentEmployeeSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({"detail": "Employee ID is required."})
         return data
     
-    
+        
     def update(self, instance, validated_data):
         departament_id = self.context['view'].kwargs.get('departament_id')
         employee_id = self.context['view'].kwargs.get('pk')

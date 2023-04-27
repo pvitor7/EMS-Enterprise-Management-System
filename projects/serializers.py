@@ -154,4 +154,5 @@ class ProjectEmployeeSerializer(serializers.ModelSerializer):
                 
         validated_data['project'] = project
         validated_data['employee'] = employee
-        return super().create(validated_data);      
+        return super().create(validated_data);
+    

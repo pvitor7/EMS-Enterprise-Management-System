@@ -8,15 +8,11 @@ from employees.utils import SerializerByMethodMixin
 
 
 # Create your views here.
-class ProjectListCreateView(SerializerByMethodMixin, generics.ListCreateAPIView):
+class ProjectListCreateView(generics.ListCreateAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Project.objects.all()
-    serializer_map = {
-        'GET': ProjectSerializer,
-        'POST': ProjectSerializer,
-    }
-    # serializer_class = ProjectSerializer
+    serializer_class = ProjectSerializer
 
 
 class ProjectRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):

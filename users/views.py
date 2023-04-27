@@ -1,4 +1,3 @@
-
 from django.contrib.auth import authenticate
 from .serializers import LoginSerializer, UserSerializer
 from rest_framework import generics
@@ -16,8 +15,8 @@ from .permissions import UserAccount
 class UserCreateView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    
-    
+
+
 class UserListView(generics.ListAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
@@ -32,24 +31,22 @@ class UserRetriveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
 
 
-    
 class LoginView(APIView):
     queryset = User.objects.all()
     serializer_class = LoginSerializer
-    
+
     def post(self, request: Request) -> Response:
         user_dict = request.data
-        
-        if request.data.get('email'):
-            username = get_object_or_404(
-            User, email=request.data['email']).username
-            user_dict['username'] = username
+        if request.data.get("email"):
+            username = get_object_or_404(User, email=request.data["email"]).username
+            user_dict["username"] = username
 
-        elif request.data.get('cellphone'):
+        elif request.data.get("cellphone"):
             username = get_object_or_404(
-            User, cellphone=request.data['cellphone']).username
-            user_dict['username'] = username
-        
+                User, cellphone=request.data["cellphone"]
+            ).username
+            user_dict["username"] = username
+            
         serializer = LoginSerializer(data=user_dict)
         serializer.is_valid(raise_exception=True)
         login_user = authenticate(**serializer.validated_data)
@@ -57,4 +54,3 @@ class LoginView(APIView):
             raise Http404("User not found.")
         token, _ = Token.objects.get_or_create(user=login_user)
         return Response({"token": token.key})
-        
